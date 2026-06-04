@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>网安日报速递 - 2026年6月4日</title>
+    <link rel="stylesheet" href="../assets/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+</head>
+<body>
+    <div class="newspaper">
+        <!-- Masthead -->
+        <header class="masthead">
+            <div class="newspaper-subtitle">AI城 · 网络安全</div>
+            <a href="../index.html" style="color:inherit;text-decoration:none;">
+                <h1 class="newspaper-title">网安日报速递</h1>
+            </a>
+            <div class="newspaper-subtitle">CYBERSECURITY DAILY EXPRESS</div>
+        </header>
+
+        <!-- Edition Info -->
+        <div class="edition-info">
+            <span class="edition-date">2026年6月4日 星期四</span>
+            <span class="edition-number">第 22 期</span>
+            <span>每日精选 · 值得关注</span>
+        </div>
+
+        <!-- Keywords Banner -->
+        <div class="keywords-banner">
+            <strong>今日关键词：</strong>Magento RCE零日 | HTTP/2 Bomb DoS | Microsoft 365令牌窃取 | Gemini通知劫持 | Windows NTLM哈希泄露
+        </div>
+
+        <!-- Nav -->
+        <a href="../index.html" class="nav-back">&larr; 返回目录</a>
+
+        <!-- Main Content -->
+        <div class="content-wrapper">
+            <!-- Main Headline -->
+            <div class="headline-section">
+                <h2 class="main-headline">Magento RCE零日漏洞被CISA收录KEV：单个Cookie即可接管电商服务器</h2>
+                <p class="sub-headline">CVE-2026-45247 CVSS 9.8，Mirasvit Cache Warmer插件PHP反序列化缺陷，一周内从披露到收录创纪录</p>
+            </div>
+
+            <!-- Featured Articles -->
+            <div class="articles-grid">
+                <!-- Featured Article 1 -->
+                <article class="article-card featured">
+                    <span class="article-number">1</span>
+                    <span class="severity-badge severity-critical">严重</span>
+                    <h3 class="article-title">Magento RCE零日 CVE-2026-45247 被CISA收录KEV</h3>
+                    <div class="article-meta">
+                        <span>CVSS 9.8</span>
+                        <span class="cvss-score">在野利用</span>
+                    </div>
+                    <div class="article-body">
+                        <p>CISA于6月3日正式将CVE-2026-45247添加至已知被利用漏洞（KEV）目录。该漏洞存在于Magento电商平台广泛使用的Mirasvit Cache Warmer缓存插件中。</p>
+                        <p><strong>漏洞机制：</strong></p>
+                        <ul>
+                            <li><strong>类型：</strong>PHP反序列化不受信任数据</li>
+                            <li><strong>攻击方式：</strong>未认证攻击者通过构造恶意Cookie即可触发</li>
+                            <li><strong>影响范围：</strong>任何Magento商店前台页面</li>
+                            <li><strong>后果：</strong>远程代码执行（RCE），完全接管服务器</li>
+                        </ul>
+                        <p><strong>值得关注的原因：</strong></p>
+                        <ul>
+                            <li>Sansec安全公司于5月26日首次披露，一周内即被CISA收录</li>
+                            <li>Magento全球电商市场份额巨大，涉及海量在线商店</li>
+                            <li>单个恶意Cookie即可完成攻击，门槛极低</li>
+                        </ul>
+                    </div>
+
+                    <!-- Attack Flow -->
+                    <div class="attack-flow">
+                        <span class="flow-step">攻击者</span>
+                        <span class="flow-step">恶意Cookie</span>
+                        <span class="flow-step">Magento前台</span>
+                        <span class="flow-step">PHP反序列化</span>
+                        <span class="flow-step critical">RCE执行</span>
+                        <span class="flow-step critical">服务器接管</span>
+                    </div>
+                </article>
+
+                <!-- Article 2 -->
+                <article class="article-card">
+                    <span class="article-number">2</span>
+                    <span class="severity-badge severity-high">高危</span>
+                    <h3 class="article-title">HTTP/2 Bomb：10秒耗尽32GB内存的新型DoS攻击</h3>
+                    <div class="article-meta">
+                        <span>影响：NGINX、Apache、IIS、Envoy、Cloudflare</span>
+                    </div>
+                    <div class="article-body">
+                        <p>安全研究人员披露了一种名为"HTTP/2 Bomb"的新型远程拒绝服务攻击技术，通过滥用HPACK压缩与流控停滞机制，可在极短时间内耗尽服务器内存。</p>
+                        <p><strong>受影响组件：</strong></p>
+                        <table class="affected-table">
+                            <tr><th>服务器</th><th>风险</th></tr>
+                            <tr><td>NGINX</td><td class="risk-high">高危</td></tr>
+                            <tr><td>Apache</td><td class="risk-high">高危</td></tr>
+                            <tr><td>Microsoft IIS</td><td class="risk-high">高危</td></tr>
+                            <tr><td>Envoy</td><td class="risk-high">高危</td></tr>
+                            <tr><td>Cloudflare</td><td class="risk-medium">中高危</td></tr>
+                        </table>
+                    </div>
+                </article>
+
+                <!-- Article 3 -->
+                <article class="article-card">
+                    <span class="article-number">3</span>
+                    <span class="severity-badge severity-high">高危</span>
+                    <h3 class="article-title">Microsoft 365 Android FlagLeft：调试标志遗留致数十亿用户令牌泄露</h3>
+                    <div class="article-meta">
+                        <span>CVE-2026-41100/41101/41102/42832</span>
+                        <span class="cvss-score">已修复</span>
+                    </div>
+                    <div class="article-body">
+                        <p>研究人员发现多个Microsoft 365 Android应用中遗留了一个开发调试标志<code>setIsDebugMode(true)</code>，导致应用间身份验证检查被绕过。</p>
+                        <p><strong>受影响应用（累计下载数十亿次）：</strong></p>
+                        <ul>
+                            <li>Microsoft Word</li>
+                            <li>Microsoft PowerPoint</li>
+                            <li>Microsoft Excel</li>
+                            <li>Microsoft 365 Copilot</li>
+                            <li>Microsoft Loop</li>
+                            <li>OneNote</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <!-- Article 4 -->
+                <article class="article-card">
+                    <span class="article-number">4</span>
+                    <span class="severity-badge severity-medium">中高危</span>
+                    <h3 class="article-title">Windows Search URI：点击链接即泄露NTLMv2哈希</h3>
+                    <div class="article-meta">
+                        <span>状态：未修补</span>
+                    </div>
+                    <div class="article-body">
+                        <p>研究人员披露了一个存在于Windows <code>search:</code> URI处理程序中的未修补漏洞。攻击者诱导用户点击特制链接后，系统会自动连接到攻击者控制的SMB服务器。</p>
+                        <div class="attack-flow">
+                            <span class="flow-step">恶意链接</span>
+                            <span class="flow-step">用户点击</span>
+                            <span class="flow-step">SMB连接</span>
+                            <span class="flow-step critical">哈希窃取</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Article 5 -->
+                <article class="article-card">
+                    <span class="article-number">5</span>
+                    <span class="severity-badge severity-medium">中高危</span>
+                    <h3 class="article-title">Google Gemini通知劫持：WhatsApp/Slack消息变身攻击向量</h3>
+                    <div class="article-meta">
+                        <span>状态：已修补</span>
+                    </div>
+                    <div class="article-body">
+                        <p>研究人员发现，通过WhatsApp、Slack、SMS、Signal等应用发送的一条恶意通知，即可劫持Android设备上的Google Gemini语音助手。</p>
+                        <p><strong>攻击能力：</strong></p>
+                        <ul>
+                            <li>打开任意窗口</li>
+                            <li>伪造消息</li>
+                            <li>加入通话</li>
+                            <li>污染Gemini长期记忆</li>
+                        </ul>
+                    </div>
+                </article>
+            </div>
+
+            <!-- Quick News Section -->
+            <h3 class="section-header">速览区</h3>
+            <div class="quick-news">
+                <div class="quick-item">
+                    <h4>6. Redis CVE-2026-23479：AI工具发现两年老漏洞</h4>
+                    <p>CVSS 8.8/7.7，释放后使用漏洞，认证用户可执行任意OS命令。由自主AI工具在大代码库中发现。</p>
+                </div>
+                <div class="quick-item">
+                    <h4>7. GitHub OAuth令牌窃取：VS Code恶意扩展一键攻击</h4>
+                    <p>安装恶意VS Code扩展即可窃取GitHub完全访问令牌，对用户所有仓库拥有读写权限。</p>
+                </div>
+                <div class="quick-item">
+                    <h4>8. DoJ打击东南亚加密欺诈：冻结380万美元</h4>
+                    <p>美国司法部"破坏周"行动，冻结380万美元加密货币，取缔数百万个欺诈账户。</p>
+                </div>
+                <div class="quick-item">
+                    <h4>9. CISA新增Android/Linux内核漏洞至KEV</h4>
+                    <p>6月3日新增Android提权和Linux内核本地提权漏洞，联邦机构限期修复。</p>
+                </div>
+            </div>
+
+            <!-- Charts Section -->
+            <h3 class="section-header">风险分析</h3>
+            <div class="charts-grid">
+                <div class="chart-container">
+                    <div class="chart-title">今日漏洞严重性 × 利用状态象限</div>
+                    <div class="mermaid">
+quadrantChart
+    title 今日漏洞严重性 × 利用状态
+    x-axis "未利用" --> "在野利用"
+    y-axis "低危" --> "严重"
+    quadrant-1 "紧急修复"
+    quadrant-2 "密切关注"
+    quadrant-3 "持续监控"
+    quadrant-4 "常规更新"
+    "Magento CVE-2026-45247": [0.9, 0.95]
+    "HTTP/2 Bomb": [0.7, 0.85]
+    "Microsoft 365 FlagLeft": [0.6, 0.75]
+    "Windows Search URI": [0.8, 0.7]
+    "Gemini通知劫持": [0.5, 0.65]
+    "Redis CVE-2026-23479": [0.4, 0.8]
+    "GitHub OAuth窃取": [0.6, 0.6]
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <div class="chart-title">今日安全事件类型分布</div>
+                    <div class="mermaid">
+pie title 今日安全事件类型分布
+    "Web应用漏洞" : 35
+    "平台/框架漏洞" : 25
+    "AI安全" : 15
+    "供应链/开发工具" : 15
+    "执法行动" : 10
+                    </div>
+                </div>
+            </div>
+
+            <!-- Timeline Section -->
+            <h3 class="section-header">本周事件时间线</h3>
+            <div class="mermaid">
+timeline
+    title 2026年6月第1周网安事件
+    6月1日 : CIFSwitch Linux 19年老漏洞
+           : WP Maps Pro未授权管理员创建
+           : Ransomware团伙朝九晚五规律曝光
+    6月2日 : Instagram AI客服劫持
+           : GoDaddy发现Steam C2恶意软件
+           : Oracle WebLogic KEV收录
+    6月3日 : HTTP/2 Bomb DoS新攻击
+           : Microsoft 365 FlagLeft漏洞
+           : Google Gemini通知劫持
+           : Redis AI发现两年老漏洞
+           : Windows Search URI NTLM泄露
+           : Magento CVE-2026-45247 KEV收录
+    6月4日 : DoJ东南亚加密欺诈打击
+           : 欧洲刑警KRATOS非法流媒体行动
+            </div>
+
+            <!-- References Section -->
+            <h3 class="section-header">相关出处</h3>
+            <div class="references-section">
+                <div class="references-grid">
+                    <div class="reference-item">
+                        <span class="reference-source">The Hacker News</span>
+                        <a href="https://thehackernews.com/2026/06/cisa-adds-exploited-magento-rce-flaw.html">Magento RCE漏洞报道</a>
+                    </div>
+                    <div class="reference-item">
+                        <span class="reference-source">The Hacker News</span>
+                        <a href="https://thehackernews.com/2026/06/new-http2-bomb-vulnerability-allows.html">HTTP/2 Bomb漏洞披露</a>
+                    </div>
+                    <div class="reference-item">
+                        <span class="reference-source">The Hacker News</span>
+                        <a href="https://thehackernews.com/2026/06/microsoft-365-android-apps-let-any-app.html">Microsoft 365 FlagLeft漏洞</a>
+                    </div>
+                    <div class="reference-item">
+                        <span class="reference-source">The Hacker News</span>
+                        <a href="https://thehackernews.com/2026/06/unpatched-windows-search-uri.html">Windows Search URI漏洞</a>
+                    </div>
+                    <div class="reference-item">
+                        <span class="reference-source">The Hacker News</span>
+                        <a href="https://thehackernews.com/2026/06/whatsapp-slack-notifications-could.html">Gemini通知劫持漏洞</a>
+                    </div>
+                    <div class="reference-item">
+                        <span class="reference-source">The Hacker News</span>
+                        <a href="https://thehackernews.com/2026/06/autonomous-ai-tool-finds-2-year-old-rce.html">Redis CVE-2026-23479</a>
+                    </div>
+                    <div class="reference-item">
+                        <span class="reference-source">The Hacker News</span>
+                        <a href="https://thehackernews.com/2026/06/one-click-github-dev-attack-lets.html">GitHub OAuth令牌窃取</a>
+                    </div>
+                    <div class="reference-item">
+                        <span class="reference-source">The Hacker News</span>
+                        <a href="https://thehackernews.com/2026/06/doj-disrupts-southeast-asia-crypto.html">DoJ东南亚加密欺诈打击</a>
+                    </div>
+                    <div class="reference-item">
+                        <span class="reference-source">SecurityAffairs</span>
+                        <a href="https://securityaffairs.com/">CIFSwitch漏洞报道</a>
+                    </div>
+                    <div class="reference-item">
+                        <span class="reference-source">CISA</span>
+                        <a href="https://www.cisa.gov/news-events/alerts/2026/06/03/cisa-adds-one-known-exploited-vulnerability-catalog">KEV目录更新公告</a>
+                    </div>
+                    <div class="reference-item">
+                        <span class="reference-source">Sansec</span>
+                        <a href="https://sansec.io/research/mirasvit-cache-warmer-object-injection">Magento漏洞研究</a>
+                    </div>
+                    <div class="reference-item">
+                        <span class="reference-source">CyberInsider</span>
+                        <a href="https://cyberinsider.com/new-http-2-bomb-attack-can-exhaust-server-memory-in-seconds/">HTTP/2 Bomb深度分析</a>
+                    </div>
+                    <div class="reference-item">
+                        <span class="reference-source">FreeBuf</span>
+                        <a href="https://www.freebuf.com/articles/web/484342.html">HTTP/2炸弹中文报道</a>
+                    </div>
+                    <div class="reference-item">
+                        <span class="reference-source">ITHome台湾</span>
+                        <a href="https://www.ithome.com.tw/news/176350">Magento漏洞中文报道</a>
+                    </div>
+                    <div class="reference-item">
+                        <span class="reference-source">CVETodo</span>
+                        <a href="https://cvetodo.com/cve/CVE-2026-45247">CVE-2026-45247详情</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="newspaper-footer">
+            <div class="footer-logo">AI城 · 网安日报</div>
+            <p class="footer-disclaimer">
+                免责声明：本报告基于公开信息整理，CVE编号、CVSS评分等数据以官方源为准。建议读者查阅原始来源获取最新动态。
+                <br>
+                每日精选 · 值得关注 | 2026年6月4日
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            securityLevel: 'loose',
+            fontFamily: 'Noto Serif SC, Georgia, serif'
+        });
+    </script>
+</body>
+</html>
