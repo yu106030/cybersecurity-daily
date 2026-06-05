@@ -1,5 +1,10 @@
 [
   {
+    "date": "2026-06-05",
+    "weekday": "星期五",
+    "keywords": "IronWorm npm供应链 · Claude Code Action劫持 · Cisco Unified CM SSRF · VS Code零日令牌窃取 · DentaQuest 260万泄露 · Acer双零日"
+  },
+  {
     "date": "2026-06-04",
     "weekday": "星期三",
     "keywords": "Magento RCE零日 CVE-2026-45247 · HTTP/2 Bomb DoS · Microsoft 365 FlagLeft · Windows Search URI · Gemini通知劫持"
