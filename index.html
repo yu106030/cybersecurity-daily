@@ -5,39 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>网安日报速递 - AI城</title>
     <link rel="stylesheet" href="assets/style.css">
-    <style>
-        .loading-spinner {
-            text-align: center;
-            padding: 60px 40px;
-            color: var(--ink-dark);
-            font-style: italic;
-            font-size: 1.2em;
-        }
-        .loading-spinner::after {
-            content: '';
-            display: inline-block;
-            width: 20px; height: 20px;
-            border: 3px solid var(--border-light);
-            border-top-color: var(--accent-red);
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-            margin-left: 10px;
-            vertical-align: middle;
-        }
-        @keyframes spin { to { transform: rotate(360deg); } }
-        .error-msg {
-            text-align: center;
-            padding: 40px;
-            color: var(--accent-red);
-            font-size: 1.1em;
-        }
-        .empty-msg {
-            text-align: center;
-            padding: 40px;
-            color: var(--ink-dark);
-            font-style: italic;
-        }
-    </style>
 </head>
 <body>
     <div class="newspaper">
@@ -51,16 +18,14 @@
             <p>每日精选全球网络安全动态，覆盖 CVE 漏洞、安全事件、威胁情报与执法行动</p>
         </div>
 
-        <!-- Latest Edition Banner (dynamically filled) -->
-        <div id="latest-banner" class="keywords-banner" style="display:none;">
+        <!-- Latest Edition Banner -->
+        <div id="latest-banner" class="keywords-banner">
             <strong>最新一期：</strong><span id="latest-text"></span>
         </div>
 
         <!-- Archive -->
         <h3 class="section-header" style="margin:30px 40px 20px;">历史存档</h3>
-        <div id="archive-grid" class="archive-grid">
-            <div class="loading-spinner">加载中</div>
-        </div>
+        <div id="archive-grid" class="archive-grid"></div>
 
         <!-- Footer -->
         <footer class="newspaper-footer">
@@ -75,66 +40,99 @@
 
     <script>
     (function() {
-        // 日期格式化：2026-06-04 -> 2026年6月4日
-        function formatDateCN(dateStr) {
-            const parts = dateStr.split('-');
-            return parts[0] + '年' + parseInt(parts[1]) + '月' + parseInt(parts[2]) + '日';
-        }
+        // ============================================================
+        // 存档数据 — 每次新增日报时在此数组头部追加一条即可
+        // 不再依赖 index.json，本地 file:// 协议也能正常显示
+        // ============================================================
+        var ARCHIVE_DATA = [
+            {
+                "date": "2026-06-05",
+                "weekday": "星期五",
+                "keywords": "IronWorm npm供应链 · Claude Code Action劫持 · Cisco Unified CM SSRF · VS Code零日令牌窃取 · DentaQuest 260万泄露 · Acer双零日"
+            },
+            {
+                "date": "2026-06-04",
+                "weekday": "星期三",
+                "keywords": "Magento RCE零日 CVE-2026-45247 · HTTP/2 Bomb DoS · Microsoft 365 FlagLeft · Windows Search URI · Gemini通知劫持"
+            },
+            {
+                "date": "2026-06-03",
+                "weekday": "星期二",
+                "keywords": "Netlogon零点击RCE · Oracle WebLogic KEV · Red Hat npm供应链 · Android零日 · Kirki WordPress提权"
+            },
+            {
+                "date": "2026-06-02",
+                "weekday": "星期一",
+                "keywords": "Google MCP Toolbox DNS重绑定 · Gogs零日77天无补丁 · Carnival邮轮数据泄露 · Proofpoint 2026报告"
+            },
+            {
+                "date": "2026-06-01",
+                "weekday": "星期日",
+                "keywords": "Windows Netlogon零点击RCE · PAN-OS VPN绕过 · Daemon Tools供应链 · Gogs零日 · Nx Console投毒"
+            },
+            {
+                "date": "2026-05-30",
+                "weekday": "星期六",
+                "keywords": "Gogs零日RCE · FortiClient EMS CVE-2026-35616 · Marimo未认证RCE · Kimsuky HTTPSpy · 荷兰摧毁僵尸网络"
+            },
+            {
+                "date": "2026-05-28",
+                "weekday": "星期三",
+                "keywords": "GitLab 6×CVE同日修复 · Nx Console VS扩展投毒 · GitBucket老漏洞标注 · NVIDIA Triton认证绕过"
+            },
+            {
+                "date": "2026-05-23",
+                "weekday": "星期五",
+                "keywords": "Trend Micro Apex One在野 · Drupal PostgreSQL SQL注入 · Cisco CVSS 10.0 · HPLIP提权"
+            },
+            {
+                "date": "2026-05-22",
+                "weekday": "星期四",
+                "keywords": "Cisco CVSS 10.0满分 · Apache OFBiz RCE · OpenClaw四漏洞链 · Claude Code沙箱绕过 · CISA凭证泄露"
+            }
+        ];
 
-        // 获取星期
-        function getWeekday(dateStr) {
-            const weekdays = ['星期日','星期一','星期二','星期三','星期四','星期五','星期六'];
-            const d = new Date(dateStr + 'T00:00:00');
-            return weekdays[d.getDay()];
+        // 日期格式化：2026-06-05 -> 2026年6月5日
+        function formatDateCN(dateStr) {
+            var parts = dateStr.split('-');
+            return parts[0] + '年' + parseInt(parts[1]) + '月' + parseInt(parts[2]) + '日';
         }
 
         // 生成单张存档卡片
         function createCard(item, isLatest) {
-            const card = document.createElement('a');
+            var card = document.createElement('a');
             card.href = 'daily/' + item.date + '.html';
             card.className = 'archive-card' + (isLatest ? ' latest' : '');
-            card.innerHTML = (isLatest ? '<span class="card-tag">LATEST</span>' : '') +
-                '<div class="card-date">' + formatDateCN(item.date) + ' ' + (item.weekday || getWeekday(item.date)) + '</div>' +
+            card.innerHTML =
+                (isLatest ? '<span class="card-tag">LATEST</span>' : '') +
+                '<div class="card-date">' + formatDateCN(item.date) + ' ' + item.weekday + '</div>' +
                 '<div class="card-keywords">' + (item.keywords || '') + '</div>';
             return card;
         }
 
-        // 主加载逻辑
-        fetch('daily/index.json')
-            .then(function(res) {
-                if (!res.ok) throw new Error('HTTP ' + res.status);
-                return res.json();
-            })
-            .then(function(data) {
-                const grid = document.getElementById('archive-grid');
-                const banner = document.getElementById('latest-banner');
-                const bannerText = document.getElementById('latest-text');
-                const latestLink = document.getElementById('latest-link');
+        // 渲染
+        var grid = document.getElementById('archive-grid');
+        var bannerText = document.getElementById('latest-text');
+        var latestLink = document.getElementById('latest-link');
 
-                if (!data || data.length === 0) {
-                    grid.innerHTML = '<div class="empty-msg">暂无存档</div>';
-                    return;
-                }
+        if (!ARCHIVE_DATA || ARCHIVE_DATA.length === 0) {
+            grid.innerHTML = '<div class="empty-msg">暂无存档</div>';
+            return;
+        }
 
-                // 按日期降序排列
-                data.sort(function(a, b) { return b.date.localeCompare(a.date); });
+        // 按日期降序排列（数据已手动排好序，这里做一次保险）
+        ARCHIVE_DATA.sort(function(a, b) { return b.date.localeCompare(a.date); });
 
-                // 更新最新一期横幅
-                const latest = data[0];
-                bannerText.textContent = formatDateCN(latest.date) + ' — ' + (latest.keywords || '');
-                banner.style.display = 'block';
-                latestLink.href = 'daily/' + latest.date + '.html';
+        // 更新最新一期横幅
+        var latest = ARCHIVE_DATA[0];
+        bannerText.textContent = formatDateCN(latest.date) + ' — ' + (latest.keywords || '');
+        latestLink.href = 'daily/' + latest.date + '.html';
 
-                // 渲染卡片
-                grid.innerHTML = '';
-                data.forEach(function(item, i) {
-                    grid.appendChild(createCard(item, i === 0));
-                });
-            })
-            .catch(function(err) {
-                document.getElementById('archive-grid').innerHTML =
-                    '<div class="error-msg">加载失败: ' + err.message + '<br>请确认 daily/index.json 文件存在</div>';
-            });
+        // 渲染卡片
+        grid.innerHTML = '';
+        for (var i = 0; i < ARCHIVE_DATA.length; i++) {
+            grid.appendChild(createCard(ARCHIVE_DATA[i], i === 0));
+        }
     })();
     </script>
 </body>
