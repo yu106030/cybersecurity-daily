@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>网安日报速递 - 2026年6月6日</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&display=swap');
+
+        :root {
+            --ink-black: #1a1a1a;
+            --ink-dark: #2d2d2d;
+            --paper-cream: #f5f0e8;
+            --paper-aged: #e8e0d0;
+            --accent-red: #c41e3a;
+            --accent-orange: #e85d04;
+            --accent-gold: #c9a227;
+            --border-dark: #3d3d3d;
+            --border-light: #b8b0a0;
+            --shadow-dark: rgba(0,0,0,0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--ink-black);
+            font-family: 'Noto Serif SC', 'Georgia', serif;
+            color: var(--ink-black);
+            line-height: 1.8;
+            padding: 20px;
+        }
+
+        .newspaper {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: var(--paper-cream);
+            box-shadow: 0 0 60px rgba(0,0,0,0.5), 0 0 120px rgba(0,0,0,0.3);
+            border: 3px solid var(--border-dark);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .newspaper::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background:
+                radial-gradient(ellipse at 10% 10%, rgba(139,90,43,0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at 90% 90%, rgba(139,90,43,0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0.02) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .masthead {
+            background: var(--ink-black);
+            color: var(--paper-cream);
+            padding: 30px 40px 20px;
+            text-align: center;
+            border-bottom: 4px double var(--accent-gold);
+            position: relative;
+        }
+        .masthead::after {
+            content: '';
+            position: absolute;
+            bottom: -8px; left: 0; right: 0;
+            height: 2px;
+            background: var(--accent-red);
+        }
+        .newspaper-title {
+            font-family: 'Playfair Display', 'Noto Serif SC', serif;
+            font-size: 3.5em;
+            font-weight: 900;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            margin: 10px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            background: linear-gradient(180deg, #fff 0%, #d4c5a0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .newspaper-subtitle {
+            font-size: 1.2em;
+            letter-spacing: 12px;
+            color: var(--accent-gold);
+            margin-bottom: 10px;
+        }
+
+        .edition-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 40px;
+            background: var(--paper-aged);
+            border-bottom: 2px solid var(--border-light);
+            font-size: 0.85em;
+            color: var(--ink-dark);
+        }
+        .edition-date { font-weight: 700; color: var(--accent-red); }
+        .edition-number { font-style: italic; }
+
+        .keywords-banner {
+            background: linear-gradient(90deg, var(--accent-red), var(--accent-orange));
+            color: white;
+            padding: 12px 40px;
+            font-size: 0.95em;
+            letter-spacing: 2px;
+        }
+        .keywords-banner strong { margin-right: 10px; }
+
+        .content-wrapper {
+            padding: 30px 40px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .headline-section {
+            margin-bottom: 40px;
+            border-bottom: 3px solid var(--ink-black);
+            padding-bottom: 30px;
+        }
+        .main-headline {
+            font-family: 'Playfair Display', 'Noto Serif SC', serif;
+            font-size: 2.8em;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 15px;
+            color: var(--ink-black);
+            border-left: 6px solid var(--accent-red);
+            padding-left: 20px;
+        }
+        .sub-headline {
+            font-size: 1.4em;
+            color: var(--ink-dark);
+            font-style: italic;
+            margin-bottom: 20px;
+            padding-left: 26px;
+        }
+
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        .article-card {
+            border: 1px solid var(--border-light);
+            padding: 25px;
+            background: rgba(255,255,255,0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+        .article-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px var(--shadow-dark);
+        }
+        .article-card.featured {
+            grid-column: span 2;
+            border: 2px solid var(--accent-red);
+            background: linear-gradient(135deg, rgba(196,30,58,0.05) 0%, rgba(255,255,255,0.8) 100%);
+        }
+        .article-number {
+            position: absolute;
+            top: -15px; left: 20px;
+            background: var(--ink-black);
+            color: var(--accent-gold);
+            width: 35px; height: 35px;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 900; font-size: 1.1em;
+            border-radius: 50%;
+        }
+
+        .severity-badge {
+            display: inline-block;
+            padding: 3px 12px;
+            font-size: 0.75em;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+        .severity-critical { background: var(--accent-red); color: white; }
+        .severity-high { background: var(--accent-orange); color: white; }
+        .severity-medium { background: var(--accent-gold); color: var(--ink-black); }
+
+        .article-title {
+            font-family: 'Playfair Display', 'Noto Serif SC', serif;
+            font-size: 1.5em;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 12px;
+            color: var(--ink-black);
+        }
+        .article-meta {
+            font-size: 0.85em;
+            color: var(--ink-dark);
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-light);
+        }
+        .cvss-score {
+            display: inline-block;
+            background: var(--ink-black);
+            color: var(--accent-red);
+            padding: 2px 10px;
+            font-weight: 700;
+            font-size: 0.9em;
+            margin-left: 10px;
+        }
+        .article-body {
+            font-size: 0.95em;
+            line-height: 1.9;
+            color: var(--ink-dark);
+        }
+        .article-body p { margin-bottom: 12px; text-indent: 2em; }
+        .article-body ul { margin: 10px 0; padding-left: 2em; }
+        .article-body li { margin-bottom: 5px; }
+
+        .section-header {
+            font-family: 'Playfair Display', 'Noto Serif SC', serif;
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--ink-black);
+            border-bottom: 3px solid var(--ink-black);
+            padding-bottom: 10px;
+            margin: 40px 0 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .section-header::before {
+            content: '\00A7';
+            color: var(--accent-red);
+            font-size: 1.2em;
+        }
+
+        .quick-news {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        .quick-item {
+            padding: 20px;
+            border-left: 4px solid var(--accent-orange);
+            background: rgba(232,93,4,0.05);
+        }
+        .quick-item h4 { font-size: 1.1em; margin-bottom: 8px; color: var(--ink-black); }
+        .quick-item p { font-size: 0.9em; color: var(--ink-dark); }
+
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        .chart-container {
+            border: 1px solid var(--border-light);
+            padding: 20px;
+            background: white;
+            text-align: center;
+        }
+        .chart-title {
+            font-weight: 700;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+            color: var(--ink-black);
+        }
+        .mermaid { display: flex; justify-content: center; }
+
+        .attack-flow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+            padding: 20px;
+            background: rgba(0,0,0,0.03);
+            border-radius: 4px;
+        }
+        .flow-step {
+            background: var(--ink-black);
+            color: var(--paper-cream);
+            padding: 8px 16px;
+            font-size: 0.85em;
+            position: relative;
+        }
+        .flow-step::after {
+            content: '\2192';
+            position: absolute;
+            right: -20px; top: 50%;
+            transform: translateY(-50%);
+            color: var(--accent-red);
+            font-weight: 700;
+        }
+        .flow-step:last-child::after { display: none; }
+        .flow-step.critical { background: var(--accent-red); }
+
+        .affected-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        .affected-table th {
+            background: var(--ink-black);
+            color: var(--paper-cream);
+            padding: 10px;
+            text-align: left;
+        }
+        .affected-table td {
+            padding: 10px;
+            border-bottom: 1px solid var(--border-light);
+        }
+        .affected-table tr:hover { background: rgba(232,93,4,0.05); }
+        .risk-high { color: var(--accent-red); font-weight: 700; }
+        .risk-medium { color: var(--accent-orange); font-weight: 700; }
+
+        .references-section {
+            background: var(--paper-aged);
+            padding: 30px;
+            margin-top: 40px;
+            border-top: 4px double var(--ink-black);
+        }
+        .references-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+        .reference-item {
+            font-size: 0.8em;
+            padding: 10px;
+            background: white;
+            border: 1px solid var(--border-light);
+        }
+        .reference-item a {
+            color: var(--accent-red);
+            text-decoration: none;
+            word-break: break-all;
+        }
+        .reference-item a:hover { text-decoration: underline; }
+        .reference-source {
+            font-weight: 700;
+            color: var(--ink-dark);
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .newspaper-footer {
+            background: var(--ink-black);
+            color: var(--paper-cream);
+            padding: 30px 40px;
+            text-align: center;
+            border-top: 4px double var(--accent-gold);
+        }
+        .footer-logo {
+            font-family: 'Playfair Display', 'Noto Serif SC', serif;
+            font-size: 1.5em;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .footer-disclaimer {
+            font-size: 0.85em;
+            color: rgba(245,240,232,0.7);
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 1024px) {
+            .articles-grid { grid-template-columns: repeat(2, 1fr); }
+            .article-card.featured { grid-column: span 2; }
+        }
+        @media (max-width: 768px) {
+            body { padding: 10px; }
+            .newspaper-title { font-size: 2em; letter-spacing: 4px; }
+            .main-headline { font-size: 1.8em; }
+            .articles-grid { grid-template-columns: 1fr; }
+            .article-card.featured { grid-column: span 1; }
+            .quick-news { grid-template-columns: 1fr; }
+            .charts-grid { grid-template-columns: 1fr; }
+            .references-grid { grid-template-columns: 1fr; }
+            .edition-info { flex-direction: column; gap: 10px; }
+            .content-wrapper { padding: 20px; }
+            .masthead { padding: 20px; }
+        }
+        @media print {
+            body { background: white; padding: 0; }
+            .newspaper { box-shadow: none; border: none; }
+            .article-card:hover { transform: none; box-shadow: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="newspaper">
+        <!-- Masthead -->
+        <header class="masthead">
+            <div class="newspaper-subtitle">AI城 · 网络安全</div>
+            <h1 class="newspaper-title">网安日报速递</h1>
+            <div class="newspaper-subtitle">CYBERSECURITY DAILY EXPRESS</div>
+        </header>
+
+        <!-- Edition Info -->
+        <div class="edition-info">
+            <span class="edition-date">2026年6月6日 星期六</span>
+            <span class="edition-number">第 24 期 | 总第 24 期</span>
+            <span>每日精选 · 值得关注</span>
+        </div>
+
+        <!-- Keywords Banner -->
+        <div class="keywords-banner">
+            <strong>今日关键词：</strong>SolarWinds Serv-U DoS漏洞 | Mirasvit Cache Warmer RCE | MLflow AI凭证泄露 | Carnival 600万数据泄露 | WordPress OTP认证绕过 | Qilin勒索软件活跃
+        </div>
+
+        <!-- Main Content -->
+        <div class="content-wrapper">
+            <!-- Main Headline -->
+            <div class="headline-section">
+                <h2 class="main-headline">SolarWinds Serv-U高危漏洞被CISA紧急收录KEV：全球12,276台实例暴露</h2>
+                <p class="sub-headline">CVE-2026-28318 CVSS 7.5，攻击者可发送特制POST请求导致服务崩溃，72.3%为未修补高危版本</p>
+            </div>
+
+            <!-- Featured Articles -->
+            <div class="articles-grid">
+                <!-- Featured Article 1 -->
+                <article class="article-card featured">
+                    <span class="article-number">1</span>
+                    <span class="severity-badge severity-high">高危</span>
+                    <h3 class="article-title">SolarWinds Serv-U DoS漏洞：CISA紧急收录KEV</h3>
+                    <div class="article-meta">
+                        <span>CVE-2026-28318 | CVSS 7.5 | 截止日：6月19日</span>
+                        <span class="cvss-score">已修复</span>
+                    </div>
+                    <div class="article-body">
+                        <p>SolarWinds Serv-U文件传输软件爆出高危拒绝服务漏洞，攻击者可发送携带`Content-Encoding: deflate`头的特制POST请求，触发压缩炸弹导致服务崩溃。该漏洞已被CISA加入已知被利用漏洞(KEV)目录。</p>
+                        <p><strong>漏洞机制/攻击方式：</strong></p>
+                        <ul>
+                            <li><strong>类型：</strong>CWE-400 不受控资源消耗型DoS</li>
+                            <li><strong>入口：</strong>HTTP/S管理端口（默认80/443）</li>
+                            <li><strong>执行：</strong>发送恶意POST请求触发zlib解压炸弹</li>
+                            <li><strong>影响：</strong>内存耗尽+CPU占满→服务崩溃</li>
+                        </ul>
+                        <p><strong>值得关注的原因：</strong></p>
+                        <ul>
+                            <li>全球12,276台公网可访问实例，72.3%为未修补高危版本</li>
+                            <li>中国境内1,892台实例面临风险</li>
+                            <li>罕见的纯DoS漏洞被CISA破例收录KEV（近五年占比仅2.44%）</li>
+                        </ul>
+                    </div>
+                    <div class="attack-flow">
+                        <span class="flow-step">攻击者</span>
+                        <span class="flow-step">恶意POST请求</span>
+                        <span class="flow-step">Content-Encoding: deflate</span>
+                        <span class="flow-step">压缩炸弹</span>
+                        <span class="flow-step critical">内存耗尽</span>
+                        <span class="flow-step critical">服务崩溃</span>
+                    </div>
+                </article>
+
+                <!-- Article 2 -->
+                <article class="article-card">
+                    <span class="article-number">2</span>
+                    <span class="severity-badge severity-critical">严重</span>
+                    <h3 class="article-title">Mirasvit Cache Warmer RCE漏洞：Magento网站面临完全控制</h3>
+                    <div class="article-meta">
+                        <span>CVE-2026-45247 | CVSS 9.8 | 截止日：今日</span>
+                        <span class="cvss-score">在野利用</span>
+                    </div>
+                    <div class="article-body">
+                        <p>Magento 2扩展Mirasvit Full Page Cache Warmer存在PHP反序列化漏洞，攻击者可通过构造恶意Cookie实现远程代码执行，完全控制服务器。</p>
+                        <p><strong>攻击影响：</strong></p>
+                        <ul>
+                            <li>访问客户PII、支付信息、订单历史</li>
+                            <li>篡改网站内容、注入恶意脚本</li>
+                            <li>重定向支付流程</li>
+                        </ul>
+                        <p><strong>紧急修复：</strong></p>
+                        <ul>
+                            <li>升级至1.11.12版本</li>
+                            <li>或禁用扩展：`bin/magento module:disable Mirasvit_CacheWarmer`</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <!-- Article 3 -->
+                <article class="article-card">
+                    <span class="article-number">3</span>
+                    <span class="severity-badge severity-critical">严重</span>
+                    <h3 class="article-title">MLflow AI Gateway凭证泄露漏洞：CVSS 9.1</h3>
+                    <div class="article-meta">
+                        <span>CVE-2026-4035 | CVSS 9.1</span>
+                        <span class="cvss-score">已修复</span>
+                    </div>
+                    <div class="article-body">
+                        <p>MLflow AI Gateway组件存在环境变量解析漏洞，攻击者可窃取服务器敏感凭证（如AWS密钥），导致云存储桶中毒和下游环境代码执行。</p>
+                        <p><strong>CVSS评分差异：</strong></p>
+                        <ul>
+                            <li>NIST评估：7.7 (高危)</li>
+                            <li>CNA评估：9.1 (严重)</li>
+                        </ul>
+                        <p><strong>修复方案：</strong>升级至MLflow 3.11.0或更高版本</p>
+                    </div>
+                </article>
+
+                <!-- Article 4 -->
+                <article class="article-card">
+                    <span class="article-number">4</span>
+                    <span class="severity-badge severity-critical">严重</span>
+                    <h3 class="article-title">Carnival Corporation大规模数据泄露：近600万客户受影响</h3>
+                    <div class="article-meta">
+                        <span>ShinyHunters组织 | 社会工程学攻击</span>
+                        <span class="cvss-score">数据泄露</span>
+                    </div>
+                    <div class="article-body">
+                        <p>全球最大邮轮运营商Carnival Corporation确认发生数据泄露，影响5,995,277名客户。攻击者通过社会工程学手段入侵系统。</p>
+                        <p><strong>泄露数据：</strong></p>
+                        <ul>
+                            <li>姓名、电子邮件、出生日期</li>
+                            <li>地理位置、忠诚度计划信息</li>
+                            <li>未确认：支付卡信息、护照号码</li>
+                        </ul>
+                        <p><strong>受影响品牌：</strong>公主邮轮、歌诗达邮轮、冠达邮轮等9个品牌</p>
+                    </div>
+                </article>
+
+                <!-- Article 5 -->
+                <article class="article-card">
+                    <span class="article-number">5</span>
+                    <span class="severity-badge severity-critical">严重</span>
+                    <h3 class="article-title">WordPress OTP插件认证绕过：CVSS 9.8无补丁</h3>
+                    <div class="article-meta">
+                        <span>CVE-2026-3655 | CVSS 9.8 | 尚无补丁</span>
+                        <span class="cvss-score">高危</span>
+                    </div>
+                    <div class="article-body">
+                        <p>WordPress插件"OTP Login With Phone Number"存在认证绕过漏洞，攻击者可冒充任何用户（包括管理员）登录系统，利用门槛极低。</p>
+                        <p><strong>技术原理：</strong></p>
+                        <ul>
+                            <li>漏洞位于Firebase验证流程</li>
+                            <li>未将Firebase会话与电话号码绑定</li>
+                            <li>攻击者可提交自己的会话+受害者电话号码</li>
+                        </ul>
+                        <p><strong>当前状态：</strong>尚无官方补丁，建议禁用插件或实施WAF防护</p>
+                    </div>
+                </article>
+            </div>
+
+            <!-- Quick News Section -->
+            <h3 class="section-header">速览区</h3>
+            <div class="quick-news">
+                <div class="quick-item">
+                    <h4>6. Qilin勒索软件组织持续活跃</h4>
+                    <p>Qilin组织在6月继续扩展攻击范围，近期受害者包括葡萄牙MEISA-Sines、巴西Clinica Maintenes等多家企业，采用数据窃取+公开曝光双重勒索。</p>
+                </div>
+                <div class="quick-item">
+                    <h4>7. CVE-2026-45247今日截止修复</h4>
+                    <p>Mirasvit Cache Warmer RCE漏洞今日为CISA联邦机构修复截止日期，所有受影响Magento网站必须立即行动。</p>
+                </div>
+                <div class="quick-item">
+                    <h4>8. Android Framework零日漏洞确认在野利用</h4>
+                    <p>CVE-2025-48595 Android Framework整数溢出漏洞被确认为"有限的、针对性的利用"，可能被商业间谍软件用于攻击高价值目标。</p>
+                </div>
+                <div class="quick-item">
+                    <h4>9. Linux内核cgroups漏洞被加入KEV</h4>
+                    <p>CVE-2022-0492 Linux内核cgroups权限提升漏洞被CISA加入KEV，对容器化环境（Docker、Kubernetes）构成直接威胁。</p>
+                </div>
+            </div>
+
+            <!-- Charts Section -->
+            <h3 class="section-header">风险分析</h3>
+            <div class="charts-grid">
+                <div class="chart-container">
+                    <div class="chart-title">今日漏洞风险象限分析</div>
+                    <div class="mermaid">
+quadrantChart
+    title 漏洞风险象限分析
+    x-axis 利用难度低 --> 利用难度高
+    y-axis 影响范围小 --> 影响范围大
+    quadrant-1 "紧急修复"
+    quadrant-2 "重点监控"
+    quadrant-3 "常规关注"
+    quadrant-4 "风险可控"
+    "CVE-2026-45247 Mirasvit": [0.2, 0.9]
+    "CVE-2026-4035 MLflow": [0.3, 0.8]
+    "CVE-2026-3655 OTP插件": [0.1, 0.7]
+    "CVE-2026-28318 Serv-U": [0.4, 0.6]
+    "Carnival数据泄露": [0.8, 0.9]
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <div class="chart-title">今日安全事件类型分布</div>
+                    <div class="mermaid">
+pie title 今日安全事件类型分布
+    "CVE漏洞" : 5
+    "数据泄露" : 1
+    "勒索软件" : 1
+    "供应链攻击" : 1
+    "AI安全" : 1
+                    </div>
+                </div>
+            </div>
+
+            <!-- Attack Flow Diagram -->
+            <h3 class="section-header">SolarWinds Serv-U攻击链</h3>
+            <div class="chart-container" style="margin-bottom:40px;">
+                <div class="mermaid">
+flowchart TD
+    A[攻击者] --> B[发送恶意POST请求]
+    B --> C[Content-Encoding: deflate]
+    C --> D[触发压缩炸弹]
+    D --> E[内存耗尽/CPU占满]
+    E --> F[Serv-U服务崩溃]
+    
+    G[防御措施] --> H[升级至15.5.4 Hotfix1]
+    G --> I[WAF拦截deflate请求]
+    G --> J[限制公网暴露]
+                </div>
+            </div>
+
+            <!-- Timeline Section -->
+            <h3 class="section-header">本周事件时间线</h3>
+            <div style="margin-bottom:40px;">
+                <div class="mermaid">
+timeline
+    title 2026年6月第1周网安事件
+    6月1日 : CISA KEV Cisco PAN-OS截止日
+           : Carnival数据泄露公开披露
+    6月2日 : CISA新增Android/Linux内核KEV
+           : Google Android 6月补丁124漏洞
+    6月3日 : Magento RCE CVE-2026-45247 KEV收录
+           : MLflow CVE-2026-4035披露
+           : HTTP/2 Bomb DoS新攻击
+    6月4日 : IronWorm npm供应链攻击
+           : Claude Code Action漏洞披露
+           : Cisco Unified CM SSRF修复
+    6月5日 : SolarWinds Serv-U CVE-2026-28318 KEV收录
+           : TA4922钓鱼扩展至欧洲四国
+    6月6日 : Mirasvit Cache Warmer修复截止日
+           : WordPress OTP漏洞持续无补丁
+                </div>
+            </div>
+
+            <!-- References Section -->
+            <h3 class="section-header">相关出处</h3>
+            <div class="references-section">
+                <div class="references-grid">
+                    <div class="reference-item">
+                        <span class="reference-source">NVD - CVE-2026-28318</span>
+                        <a href="https://nvd.nist.gov/vuln/detail/CVE-2026-28318">SolarWinds Serv-U漏洞详情</a>
+                    </div>
+                    <div class="reference-item">
+                        <span class="reference-source">CISA KEV公告</span>
+                        <a href="https://www.cisa.gov/news-events/alerts/2026/06/05/cisa-adds-one-known-exploited-vulnerability-catalog">CVE-2026-28318 KEV收录</a>
+                    </div>
+                    <div class="reference-item">
+                        <span class="reference-source">SolarWinds安全公告</span>
+                        <a href="https://www.solarwinds.com/trust-center/security-advisories/CVE-2026-28318">官方安全公告</a>
+                    </div>
+                    <div class="reference-item">
+                        <span class="reference-source">CSDN技术分析</span>
+                        <a href="https://blog.csdn.net/weixin_42376192/article/details/161737751">CVE-2026-28318深度剖析</a>
+                    </div>
+                    <div class="reference-item">
+                        <span class="reference-source">NVD - CVE-2026-45247</span>
+                        <a href="https://nvd.nist.gov/vuln/detail/CVE-2026-45247">Mirasvit Cache Warmer漏洞</a>
+                    </div>
+                    <div class="reference-item">
+                        <span class="reference-source">Threat Modeling</span>
+                        <a href="https://threat-modeling.com/mirasvit-magento-cache-warmer-rce-cve-2026-45247/">Mirasvit RCE技术分析</a>
+                    </div>
+                    <div class="reference-item">
+                        <span class="reference-source">Halo Security</span>
+                        <a href="https://blog.halosecurity.com/cve-2026-45247-critical-mirasvit-cache-warmer-flaw-puts-magento-stores-at-risk/">CVE-2026-45247详情</a>
+                    </div>
+                    <div class="reference-item">
+                        <span class="reference-source">NVD - CVE-2026-4035</span>
+                        <a href="https://nvd.nist.gov/vuln/detail/CVE-2026-4035">MLflow AI Gateway漏洞</a>
+                    </div>
+                    <div class="reference-item">
+                        <span class="reference-source">Atlas Cybersecurity</span>
+                        <a href="https://atlas-cybersecurity.com/critical-cve-2026-4035-cvss-9-1-june-3-2026/">CVE-2026-4035分析</a>
+                    </div>
+                    <div class="reference-item">
+                        <span class="reference-source">SafeState</span>
+                        <a href="https://www.safestate.com/post/carnival-corporation-data-breach-hits-nearly-6-million-customers">Carnival数据泄露详情</a>
+                    </div>
+                    <div class="reference-item">
+                        <span class="reference-source">Cruise Law News</span>
+                        <a href="https://www.cruiselawnews.com/2026/06/articles/safety-security/hackers-breach-carnival-exposing-data-of-nearly-6-million-customers/">Carnival事件报道</a>
+                    </div>
+                    <div class="reference-item">
+                        <span class="reference-source">NVD - CVE-2026-3655</span>
+                        <a href="https://nvd.nist.gov/vuln/detail/CVE-2026-3655">WordPress OTP插件漏洞</a>
+                    </div>
+                    <div class="reference-item">
+                        <span class="reference-source">Atlas Cybersecurity</span>
+                        <a href="https://atlas-cybersecurity.com/critical-cve-2026-3655-cvss-9-8-may-29-2026/">CVE-2026-3655分析</a>
+                    </div>
+                    <div class="reference-item">
+                        <span class="reference-source">SharkStriker</span>
+                        <a href="https://sharkstriker.com/blog/june-2026-data-breaches/">2026年6月数据泄露报告</a>
+                    </div>
+                    <div class="reference-item">
+                        <span class="reference-source">Threat Modeling</span>
+                        <a href="https://threat-modeling.com/vulnerability-intelligence-report-june-3-2026/">6月3日漏洞情报报告</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="newspaper-footer">
+            <div class="footer-logo">AI城 · 网安日报</div>
+            <p class="footer-disclaimer">
+                免责声明：本报告基于公开信息整理，CVE编号、CVSS评分等数据以官方源为准。建议读者查阅原始来源获取最新动态。
+                <br>
+                每日精选 · 值得关注 | 2026年6月6日
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            securityLevel: 'loose',
+            fontFamily: 'Noto Serif SC, Georgia, serif'
+        });
+    </script>
+</body>
+</html>
