@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>网安日报速递 - 2026年6月15日</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&display=swap');
+
+        :root {
+            --ink-black: #1a1a1a;
+            --ink-dark: #2d2d2d;
+            --paper-cream: #f5f0e8;
+            --paper-aged: #e8e0d0;
+            --accent-red: #c41e3a;
+            --accent-orange: #e85d04;
+            --accent-gold: #c9a227;
+            --border-dark: #3d3d3d;
+            --border-light: #b8b0a0;
+            --shadow-dark: rgba(0,0,0,0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--ink-black);
+            font-family: 'Noto Serif SC', 'Georgia', serif;
+            color: var(--ink-black);
+            line-height: 1.8;
+            padding: 20px;
+        }
+
+        .newspaper {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: var(--paper-cream);
+            box-shadow: 0 0 60px rgba(0,0,0,0.5), 0 0 120px rgba(0,0,0,0.3);
+            border: 3px solid var(--border-dark);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .newspaper::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background:
+                radial-gradient(ellipse at 10% 10%, rgba(139,90,43,0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at 90% 90%, rgba(139,90,43,0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0.02) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .masthead {
+            background: var(--ink-black);
+            color: var(--paper-cream);
+            padding: 30px 40px 20px;
+            text-align: center;
+            border-bottom: 4px double var(--accent-gold);
+            position: relative;
+        }
+        .masthead::after {
+            content: '';
+            position: absolute;
+            bottom: -8px; left: 0; right: 0;
+            height: 2px;
+            background: var(--accent-red);
+        }
+        .newspaper-title {
+            font-family: 'Playfair Display', 'Noto Serif SC', serif;
+            font-size: 3.5em;
+            font-weight: 900;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            margin: 10px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            background: linear-gradient(180deg, #fff 0%, #d4c5a0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .newspaper-subtitle {
+            font-size: 1.2em;
+            letter-spacing: 12px;
+            color: var(--accent-gold);
+            margin-bottom: 10px;
+        }
+
+        .edition-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 40px;
+            background: var(--paper-aged);
+            border-bottom: 2px solid var(--border-light);
+            font-size: 0.85em;
+            color: var(--ink-dark);
+        }
+        .edition-date { font-weight: 700; color: var(--accent-red); }
+        .edition-number { font-style: italic; }
+
+        .keywords-banner {
+            background: linear-gradient(90deg, var(--accent-red), var(--accent-orange));
+            color: white;
+            padding: 12px 40px;
+            font-size: 0.95em;
+            letter-spacing: 2px;
+        }
+        .keywords-banner strong { margin-right: 10px; }
+
+        .content-wrapper {
+            padding: 30px 40px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .headline-section {
+            margin-bottom: 40px;
+            border-bottom: 3px solid var(--ink-black);
+            padding-bottom: 30px;
+        }
+        .main-headline {
+            font-family: 'Playfair Display', 'Noto Serif SC', serif;
+            font-size: 2.8em;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 15px;
+            color: var(--ink-black);
+            border-left: 6px solid var(--accent-red);
+            padding-left: 20px;
+        }
+        .sub-headline {
+            font-size: 1.4em;
+            color: var(--ink-dark);
+            font-style: italic;
+            margin-bottom: 20px;
+            padding-left: 26px;
+        }
+
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        .article-card {
+            border: 1px solid var(--border-light);
+            padding: 25px;
+            background: rgba(255,255,255,0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+        .article-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px var(--shadow-dark);
+        }
+        .article-card.featured {
+            grid-column: span 2;
+            border: 2px solid var(--accent-red);
+            background: linear-gradient(135deg, rgba(196,30,58,0.05) 0%, rgba(255,255,255,0.8) 100%);
+        }
+        .article-number {
+            position: absolute;
+            top: -15px; left: 20px;
+            background: var(--ink-black);
+            color: var(--accent-gold);
+            width: 35px; height: 35px;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 900; font-size: 1.1em;
+            border-radius: 50%;
+        }
+
+        .severity-badge {
+            display: inline-block;
+            padding: 3px 12px;
+            font-size: 0.75em;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+        .severity-critical { background: var(--accent-red); color: white; }
+        .severity-high { background: var(--accent-orange); color: white; }
+        .severity-medium { background: var(--accent-gold); color: var(--ink-black); }
+
+        .article-title {
+            font-family: 'Playfair Display', 'Noto Serif SC', serif;
+            font-size: 1.5em;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 12px;
+            color: var(--ink-black);
+        }
+        .article-meta {
+            font-size: 0.85em;
+            color: var(--ink-dark);
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-light);
+        }
+        .cvss-score {
+            display: inline-block;
+            background: var(--ink-black);
+            color: var(--accent-red);
+            padding: 2px 10px;
+            font-weight: 700;
+            font-size: 0.9em;
+            margin-left: 10px;
+        }
+        .article-body {
+            font-size: 0.95em;
+            line-height: 1.9;
+            color: var(--ink-dark);
+        }
+        .article-body p { margin-bottom: 12px; text-indent: 2em; }
+        .article-body ul { margin: 10px 0; padding-left: 2em; }
+        .article-body li { margin-bottom: 5px; }
+
+        .section-header {
+            font-family: 'Playfair Display', 'Noto Serif SC', serif;
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--ink-black);
+            border-bottom: 3px solid var(--ink-black);
+            padding-bottom: 10px;
+            margin: 40px 0 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .section-header::before {
+            content: '\00A7';
+            color: var(--accent-red);
+            font-size: 1.2em;
+        }
+
+        .quick-news {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        .quick-item {
+            padding: 20px;
+            border-left: 4px solid var(--accent-orange);
+            background: rgba(232,93,4,0.05);
+        }
+        .quick-item h4 { font-size: 1.1em; margin-bottom: 8px; color: var(--ink-black); }
+        .quick-item p { font-size: 0.9em; color: var(--ink-dark); }
+
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        .chart-container {
+            border: 1px solid var(--border-light);
+            padding: 20px;
+            background: white;
+            text-align: center;
+        }
+        .chart-title {
+            font-weight: 700;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+            color: var(--ink-black);
+        }
+        .mermaid { display: flex; justify-content: center; }
+
+        .attack-flow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+            padding: 20px;
+            background: rgba(0,0,0,0.03);
+            border-radius: 4px;
+        }
+        .flow-step {
+            background: var(--ink-black);
+            color: var(--paper-cream);
+            padding: 8px 16px;
+            font-size: 0.85em;
+            position: relative;
+        }
+        .flow-step::after {
+            content: '\2192';
+            position: absolute;
+            right: -20px; top: 50%;
+            transform: translateY(-50%);
+            color: var(--accent-red);
+            font-weight: 700;
+        }
+        .flow-step:last-child::after { display: none; }
+        .flow-step.critical { background: var(--accent-red); }
+
+        .affected-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        .affected-table th {
+            background: var(--ink-black);
+            color: var(--paper-cream);
+            padding: 10px;
+            text-align: left;
+        }
+        .affected-table td {
+            padding: 10px;
+            border-bottom: 1px solid var(--border-light);
+        }
+        .affected-table tr:hover { background: rgba(232,93,4,0.05); }
+        .risk-high { color: var(--accent-red); font-weight: 700; }
+        .risk-medium { color: var(--accent-orange); font-weight: 700; }
+
+        .references-section {
+            background: var(--paper-aged);
+            padding: 30px;
+            margin-top: 40px;
+            border-top: 4px double var(--ink-black);
+        }
+        .references-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+        .reference-item {
+            font-size: 0.8em;
+            padding: 10px;
+            background: white;
+            border: 1px solid var(--border-light);
+        }
+        .reference-item a {
+            color: var(--accent-red);
+            text-decoration: none;
+            word-break: break-all;
+        }
+        .reference-item a:hover { text-decoration: underline; }
+        .reference-source {
+            font-weight: 700;
+            color: var(--ink-dark);
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .newspaper-footer {
+            background: var(--ink-black);
+            color: var(--paper-cream);
+            padding: 30px 40px;
+            text-align: center;
+            border-top: 4px double var(--accent-gold);
+        }
+        .footer-logo {
+            font-family: 'Playfair Display', 'Noto Serif SC', serif;
+            font-size: 1.5em;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .footer-disclaimer {
+            font-size: 0.85em;
+            color: rgba(245,240,232,0.7);
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 1024px) {
+            .articles-grid { grid-template-columns: repeat(2, 1fr); }
+            .article-card.featured { grid-column: span 2; }
+        }
+        @media (max-width: 768px) {
+            body { padding: 10px; }
+            .newspaper-title { font-size: 2em; letter-spacing: 4px; }
+            .main-headline { font-size: 1.8em; }
+            .articles-grid { grid-template-columns: 1fr; }
+            .article-card.featured { grid-column: span 1; }
+            .quick-news { grid-template-columns: 1fr; }
+            .charts-grid { grid-template-columns: 1fr; }
+            .references-grid { grid-template-columns: 1fr; }
+            .edition-info { flex-direction: column; gap: 10px; }
+            .content-wrapper { padding: 20px; }
+            .masthead { padding: 20px; }
+        }
+        @media print {
+            body { background: white; padding: 0; }
+            .newspaper { box-shadow: none; border: none; }
+            .article-card:hover { transform: none; box-shadow: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="newspaper">
+        <!-- Masthead -->
+        <header class="masthead">
+            <div class="newspaper-subtitle">AI城 · 网络安全</div>
+            <h1 class="newspaper-title">网安日报速递</h1>
+            <div class="newspaper-subtitle">CYBERSECURITY DAILY EXPRESS</div>
+        </header>
+
+        <!-- Edition Info -->
+        <div class="edition-info">
+            <span class="edition-date">2026年6月15日 星期日</span>
+            <span class="edition-number">第 34 期 | 总第 34 期</span>
+            <span>每日精选 · 值得关注</span>
+        </div>
+
+        <!-- Keywords Banner -->
+        <div class="keywords-banner">
+            <strong>今日关键词：</strong>FBI打击AI钓鱼服务 | Velvet Ant十年APT后门 | Oracle PeopleSoft零日截止日 | Langflow AI平台RCE | SAP NetWeaver CVSS 9.9 | Defender RoguePlanet零日
+        </div>
+
+        <!-- Main Content -->
+        <div class="content-wrapper">
+            <!-- Main Headline -->
+            <div class="headline-section">
+                <h2 class="main-headline">FBI瓦解"Outsider Enterprise"AI驱动钓鱼网络：$19亿损失、100万URL、380万信用卡</h2>
+                <p class="sub-headline">Google同步起诉 + 接管Telegram + 查扣10万USDT，AI犯罪进入执法+技术+立法三位一体打击时代</p>
+            </div>
+
+            <!-- Featured Articles -->
+            <div class="articles-grid">
+                <!-- Featured Article 1 -->
+                <article class="article-card featured">
+                    <span class="article-number">1</span>
+                    <span class="severity-badge severity-critical">严重</span>
+                    <h3 class="article-title">FBI瓦解"Outsider Enterprise"AI驱动钓鱼即服务网络</h3>
+                    <div class="article-meta">
+                        <span>Operation Riptide | 发现日期：6月14日</span>
+                        <span class="cvss-score">$19亿损失</span>
+                    </div>
+                    <div class="article-body">
+                        <p>FBI联合Google和Black Lotus Labs，在代号"Operation Riptide"行动中成功瓦解了名为Outsider Enterprise的大规模AI驱动钓鱼即服务（PhaaS）犯罪网络。该服务自2023年起活跃，通过美国三大电信运营商（AT&T、T-Mobile、Verizon）发送欺诈短信。</p>
+                        <p><strong>关键数据：</strong></p>
+                        <ul>
+                            <li><strong>基础设施：</strong>9,000个虚假网站、100万+欺诈URL</li>
+                            <li><strong>财务损失：</strong>380万条信用卡记录被盗，约19亿美元经济损失</li>
+                            <li><strong>短信规模：</strong>两周内发送250万条SMS诈骗短信</li>
+                            <li><strong>执法成果：</strong>查扣10万USDT、Shopify店铺、数千域名重定向</li>
+                            <li><strong>Telegram接管：</strong>FBI接管犯罪分子的Telegram机器人获取客户信息</li>
+                        </ul>
+                        <p><strong>值得关注的原因：</strong></p>
+                        <ul>
+                            <li>首次AI驱动大规模PhaaS被全面瓦解</li>
+                            <li>Google同步提起民事诉讼并推动《Stop SCAMS Act》立法</li>
+                            <li>标志着打击AI网络犯罪进入执法+技术+立法三位一体新阶段</li>
+                        </ul>
+                    </div>
+                    <div class="attack-flow">
+                        <span class="flow-step">购买PhaaS服务</span>
+                        <span class="flow-step">AI生成钓鱼短信</span>
+                        <span class="flow-step">AT&T/T-Mobile/Verizon发送</span>
+                        <span class="flow-step">虚假网站窃取</span>
+                        <span class="flow-step critical">380万信用卡被盗</span>
+                    </div>
+                </article>
+
+                <!-- Article 2 -->
+                <article class="article-card">
+                    <span class="article-number">2</span>
+                    <span class="severity-badge severity-critical">严重</span>
+                    <h3 class="article-title">Velvet Ant "Operation Highland" — Linux认证栈后门潜伏十年</h3>
+                    <div class="article-meta">
+                        <span>Sygnia披露 | 2016年至今</span>
+                        <span class="cvss-score">APT间谍</span>
+                    </div>
+                    <div class="article-body">
+                        <p>Sygnia披露中国关联APT组织Velvet Ant的"Operation Highland"行动。该组织从2016年起潜伏在隔离关键基础设施网络中，通过劫持Linux PAM和OpenSSH认证栈维持近十年隐蔽访问。</p>
+                        <p><strong>攻击链三阶段：</strong></p>
+                        <ul>
+                            <li><strong>阶段一：</strong>GS-Netcat反向Shell + SOCKS5代理隧道</li>
+                            <li><strong>阶段二：</strong>Nginx → FastCGI → uptime二进制 → SSH到隔离网络</li>
+                            <li><strong>阶段三：</strong>9个恶意pam_unix.so变体 + 木马化ssh/sshd/scp</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <!-- Article 3 -->
+                <article class="article-card">
+                    <span class="article-number">3</span>
+                    <span class="severity-badge severity-critical">严重</span>
+                    <h3 class="article-title">Oracle PeopleSoft零日 — 今日CISA KEV截止日</h3>
+                    <div class="article-meta">
+                        <span>CVSS 9.8 | CVE-2026-35273</span>
+                        <span class="cvss-score">6/15截止</span>
+                    </div>
+                    <div class="article-body">
+                        <p>Oracle PeopleSoft PeopleTools存在未认证RCE漏洞，被ShinyHunters作为零日利用攻击100+组织。诺丁汉大学确认455,000名学生数据泄露（40GB）。</p>
+                        <table class="affected-table">
+                            <tr><th>指标</th><th>详情</th></tr>
+                            <tr><td>CVSS</td><td class="risk-high">9.8</td></tr>
+                            <tr><td>受影响组织</td><td>100+</td></tr>
+                            <tr><td>KEV截止日</td><td class="risk-high">2026年6月15日（今日）</td></tr>
+                            <tr><td>攻击组织</td><td>ShinyHunters</td></tr>
+                        </table>
+                    </div>
+                </article>
+
+                <!-- Article 4 -->
+                <article class="article-card">
+                    <span class="article-number">4</span>
+                    <span class="severity-badge severity-high">高危</span>
+                    <h3 class="article-title">Langflow CVE-2026-5027在野利用 — AI开发平台RCE</h3>
+                    <div class="article-meta">
+                        <span>CVSS 8.8 | 73天未修补</span>
+                        <span class="cvss-score">AI安全</span>
+                    </div>
+                    <div class="article-body">
+                        <p>开源AI低代码平台Langflow曝路径遍历漏洞，攻击者可通过/api/v2/files端点写入任意文件实现未认证RCE。Tenable于6月8日确认在野利用。</p>
+                        <div class="attack-flow">
+                            <span class="flow-step">发送恶意请求</span>
+                            <span class="flow-step">路径遍历</span>
+                            <span class="flow-step">写入WebShell</span>
+                            <span class="flow-step critical">未认证RCE</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Article 5 -->
+                <article class="article-card">
+                    <span class="article-number">5</span>
+                    <span class="severity-badge severity-critical">严重</span>
+                    <h3 class="article-title">SAP NetWeaver CVSS 9.9 SAML认证绕过</h3>
+                    <div class="article-meta">
+                        <span>CVE-2026-44748 | 6月10日</span>
+                        <span class="cvss-score">企业安全</span>
+                    </div>
+                    <div class="article-body">
+                        <p>SAP 6月Patch Day修复15个漏洞，最严重CVE-2026-44748（CVSS 9.9）存在于NetWeaver AS ABAP的SAML认证中，可获取签名消息并修改XML绕过认证。同时修复Commerce Cloud多个关键漏洞。</p>
+                    </div>
+                </article>
+
+                <!-- Article 6 -->
+                <article class="article-card">
+                    <span class="article-number">6</span>
+                    <span class="severity-badge severity-high">高危</span>
+                    <h3 class="article-title">Microsoft Defender "RoguePlanet"零日 — 无补丁</h3>
+                    <div class="article-meta">
+                        <span>CVSS 9.6 | CVE-2026-47281</span>
+                        <span class="cvss-score">零日无补丁</span>
+                    </div>
+                    <div class="article-body">
+                        <p>安全研究员Chaotic Eclipse公开Microsoft Defender零日PoC。竞态条件漏洞可提权至SYSTEM，影响最新Windows 10/11。Windows Defender作为默认安全组件，该零日无需额外载荷即可利用。</p>
+                    </div>
+                </article>
+            </div>
+
+            <!-- Quick News Section -->
+            <h3 class="section-header">速览区</h3>
+            <div class="quick-news">
+                <div class="quick-item">
+                    <h4>7. Check Point VPN零日CVE-2026-50751持续发酵</h4>
+                    <p>Qilin勒索组织从5月7日起利用IKEv1认证绕过（CVSS 9.3），32天后Check Point才发布热修复。CISA KEV修复期限已过。</p>
+                </div>
+                <div class="quick-item">
+                    <h4>8. Ivanti Sentry CVSS 10.0 — CVE-2026-10520</h4>
+                    <p>MICS Web门户预认证OS命令注入，root权限执行。CISA KEV修复期限6月14日已过，CERT-EU发布紧急通告。</p>
+                </div>
+                <div class="quick-item">
+                    <h4>9. Veeam Backup RCE CVE-2026-44963</h4>
+                    <p>CVSS 9.4，域用户即可利用，影响55万客户/82%财富500强。12.3.2.4854已修复，建议立即更新。</p>
+                </div>
+                <div class="quick-item">
+                    <h4>10. AI Agent发现FFmpeg 21个零日后续</h4>
+                    <p>CVE-2026-39210至39218系列，depthfirst公司AI安全Agent以$1,000成本发现，最长潜伏超20年。持续推动AI自动化安全审计讨论。</p>
+                </div>
+            </div>
+
+            <!-- Charts Section -->
+            <h3 class="section-header">风险分析</h3>
+            <div class="charts-grid">
+                <div class="chart-container">
+                    <div class="chart-title">今日漏洞严重性 × 利用状态象限</div>
+                    <div class="mermaid">
+quadrantChart
+    title "今日漏洞严重性 × 利用状态"
+    x-axis "未利用" --> "在野利用"
+    y-axis "低危" --> "严重"
+    quadrant-1 "紧急修复"
+    quadrant-2 "密切关注"
+    quadrant-3 "持续监控"
+    quadrant-4 "常规更新"
+    "Outsider Enterprise PhaaS": [0.95, 0.75]
+    "Velvet Ant Operation Highland": [0.9, 0.95]
+    "Oracle PeopleSoft CVE-2026-35273": [0.95, 0.9]
+    "Langflow CVE-2026-5027": [0.85, 0.8]
+    "SAP NetWeaver CVE-2026-44748": [0.7, 0.95]
+    "Defender RoguePlanet": [0.9, 0.85]
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <div class="chart-title">今日安全事件类型分布</div>
+                    <div class="mermaid">
+pie title "今日安全事件类型分布"
+    "APT/间谍活动" : 25
+    "零日漏洞利用" : 25
+    "AI安全" : 20
+    "企业补丁" : 15
+    "执法行动" : 15
+                    </div>
+                </div>
+            </div>
+
+            <!-- Attack Flow Diagram -->
+            <h3 class="section-header">Velvet Ant 攻击链</h3>
+            <div class="chart-container" style="margin-bottom:40px;">
+                <div class="mermaid">
+flowchart TD
+    A[互联网暴露服务器] --> B[部署GS-Netcat反向Shell]
+    B --> C[安装SOCKS5代理隧道]
+    C --> D[修改Nginx配置]
+    D --> E[FastCGI进程桥接]
+    E --> F[uptime二进制建立SSH连接]
+    F --> G[进入隔离网络]
+    G --> H[替换pam_unix.so模块]
+    G --> I[木马化OpenSSH组件]
+    H --> J[凭证窃取+后门认证]
+    I --> K[键盘记录+进程隐藏]
+    J --> L[10年隐蔽持久化]
+    K --> L
+                </div>
+            </div>
+
+            <!-- Timeline Section -->
+            <h3 class="section-header">本周事件时间线</h3>
+            <div style="margin-bottom:40px;">
+                <div class="mermaid">
+timeline
+    title 2026年6月第3周网安事件
+    6月8日 : Langflow CVE-2026-5027在野利用确认
+           : FFmpeg 21零日AI发现后续
+    6月9日 : CISA KEV三连新增
+           : Veeam Backup RCE修复
+    6月10日 : SAP 6月Patch Day 15漏洞
+           : CVE-2026-44748 CVSS 9.9
+    6月11日 : Defender RoguePlanet零日公开
+           : FFmpeg零日技术突破讨论
+    6月12日 : Velvet Ant Operation Highland披露
+           : Oracle PeopleSoft CVE-2026-35273 KEV
+    6月14日 : FBI瓦解Outsider Enterprise
+           : Operation Riptide全面行动
+    6月15日 : Oracle PeopleSoft KEV截止日
+           : Check Point VPN KEV截止已过
+                </div>
+            </div>
+
+            <!-- References Section -->
+            <h3 class="section-header">相关出处</h3>
+            <div class="references-section">
+                <div class="references-grid">
+                    <div class="reference-item">
+                        <span class="reference-source">BleepingComputer</span>
+                        <a href="https://www.bleepingcomputer.com/news/security/fbi-disrupts-massive-ai-powered-phishing-service-using-a-million-urls/">FBI瓦解AI驱动钓鱼服务</a>
+                    </div>
+                    <div class="reference-item">
+                        <span class="reference-source">TechCrunch</span>
+                        <a href="https://techcrunch.com/2026/06/12/chinese-cybercrime-operation-that-used-ai-to-scam-hundreds-of-thousands-of-victims-sued-by-google/">Google起诉AI犯罪组织</a>
+                    </div>
+                    <div class="reference-item">
+                        <span class="reference-source">Google Blog</span>
+                        <a href="https://blog.google/innovation-and-ai/technology/safety-security/combatting-ai-scams/">Google打击AI诈骗</a>
+                    </div>
+                    <div class="reference-item">
+                        <span class="reference-source">BleepingComputer</span>
+                        <a href="https://www.bleepingcomputer.com/news/security/chinese-hackers-hijack-auth-flow-spy-on-isolated-network-for-a-decade/">Velvet Ant十年间谍行动</a>
+                    </div>
+                    <div class="reference-item">
+                        <span class="reference-source">Sygnia</span>
+                        <a href="https://www.sygnia.co/blog/operation-highland-velvet-ant/">Operation Highland技术分析</a>
+                    </div>
+                    <div class="reference-item">
+                        <span class="reference-source">The Hacker News</span>
+                        <a href="https://thehackernews.com/2026/06/china-linked-hackers-backdoored-linux.html">中国黑客PAM/OpenSSH后门</a>
+                    </div>
+                    <div class="reference-item">
+                        <span class="reference-source">CISA</span>
+                        <a href="https://www.cisa.gov/news-events/alerts/2026/06/12/cisa-adds-one-known-exploited-vulnerability-catalog">CVE-2026-35273 KEV收录</a>
+                    </div>
+                    <div class="reference-item">
+                        <span class="reference-source">The Register</span>
+                        <a href="https://www.theregister.com/cyber-crime/2026/06/11/shinyhunters-claims-oracle-peoplesoft-0-day-hit-100-orgs/5254443">ShinyHunters Oracle PeopleSoft零日</a>
+                    </div>
+                    <div class="reference-item">
+                        <span class="reference-source">Rescana</span>
+                        <a href="https://www.rescana.com/post/shinyhunters-exploits-oracle-peoplesoft-zero-day-cve-2026-35273-in-widespread-higher-education-cyberattack">ShinyHunters攻击详情分析</a>
+                    </div>
+                    <div class="reference-item">
+                        <span class="reference-source">The Hacker News</span>
+                        <a href="https://thehackernews.com/2026/06/unpatched-langflow-flaw-cve-2026-5027.html">Langflow CVE-2026-5027在野利用</a>
+                    </div>
+                    <div class="reference-item">
+                        <span class="reference-source">Cloud Security Alliance</span>
+                        <a href="https://labs.cloudsecurityalliance.org/research/csa-research-note-langflow-cve-2026-5027-active-exploitation/">Langflow漏洞分析报告</a>
+                    </div>
+                    <div class="reference-item">
+                        <span class="reference-source">SAP Support</span>
+                        <a href="https://support.sap.com/en/my-support/knowledge-base/security-notes-news/june-2026.html">SAP 6月Patch Day</a>
+                    </div>
+                    <div class="reference-item">
+                        <span class="reference-source">Security Affairs</span>
+                        <a href="https://securityaffairs.com/193436/security/chaotic-eclipse-unveils-rogueplanet-exploit-targeting-fully-patched-windows.html">RoguePlanet零日PoC</a>
+                    </div>
+                    <div class="reference-item">
+                        <span class="reference-source">Check Point Blog</span>
+                        <a href="https://blog.checkpoint.com/security/check-point-releases-important-hotfix-for-vulnerabilities-in-deprecated-ikev1-vpn-protocol/">CVE-2026-50751 VPN零日</a>
+                    </div>
+                    <div class="reference-item">
+                        <span class="reference-source">depthfirst</span>
+                        <a href="https://depthfirst.com/research/21-zero-days-in-ffmpeg">FFmpeg 21零日AI发现</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="newspaper-footer">
+            <div class="footer-logo">AI城 · 网安日报</div>
+            <p class="footer-disclaimer">
+                免责声明：本报告基于公开信息整理，CVE编号、CVSS评分等数据以官方源为准。建议读者查阅原始来源获取最新动态。
+                <br>
+                每日精选 · 值得关注 | 2026年6月15日
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            securityLevel: 'loose',
+            fontFamily: 'Noto Serif SC, Georgia, serif'
+        });
+    </script>
+</body>
+</html>
