@@ -1,6 +1,6 @@
 ﻿# 网络安全日报速递 — Android 小组件
 
-基于 Jetpack Glance 的原生 Android 桌面小组件，自动从 GitHub Pages 抓取最新日报内容，
+基于 Android 原生 AppWidget + RemoteViews 的桌面小组件，自动从 GitHub Pages 抓取最新日报内容，
 在桌面展示当日安全要闻。
 
 ## 功能
@@ -15,7 +15,7 @@
 
 | 层 | 技术 |
 |---|---|
-| Widget UI | Jetpack Glance 1.1.0 |
+| Widget UI | Android AppWidget + RemoteViews |
 | 后台刷新 | WorkManager 2.9.0 |
 | HTML 解析 | Jsoup 1.17.2 |
 | 网络请求 | OkHttp 4.12.0 |
@@ -66,8 +66,7 @@ android/
 │   └── src/main/
 │       ├── AndroidManifest.xml
 │       ├── java/com/cybersecdaily/widget/
-│       │   ├── CyberSecDailyWidget.kt          # Glance Widget UI
-│       │   ├── CyberSecDailyWidgetReceiver.kt  # Widget Receiver + 定时刷新
+│       │   ├── CyberSecDailyWidgetReceiver.kt  # AppWidgetProvider + RemoteViews
 │       │   ├── DailyReport.kt                  # 数据模型
 │       │   ├── ReportFetcher.kt                # HTML 抓取 & 解析
 │       │   ├── WidgetUpdateWorker.kt           # WorkManager Worker
@@ -91,7 +90,7 @@ android/
 ┌─────────────┐   HTTP GET    ┌─────────────────────────┐
 │  Android     │ ────────────→ │ GitHub Pages             │
 │  Widget      │ ←──────────── │ /index.html (找最新日期)  │
-│  (Glance)    │               │ /daily/YYYY-MM-DD.html   │
+│  Worker      │               │ /daily/YYYY-MM-DD.html   │
 └─────────────┘               └─────────────────────────┘
        │
        ▼
@@ -104,7 +103,7 @@ android/
        │
        ▼
 ┌─────────────────┐
-│ Glance Widget    │
+│ RemoteViews      │
 │ 暗色报纸风格 UI  │
 └─────────────────┘
 ```

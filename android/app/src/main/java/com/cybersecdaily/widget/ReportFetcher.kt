@@ -5,8 +5,6 @@ import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.jsoup.Jsoup
-import java.text.SimpleDateFormat
-import java.util.Locale
 import java.util.concurrent.TimeUnit
 
 object ReportFetcher {
@@ -43,8 +41,10 @@ object ReportFetcher {
 
     private fun fetchLatestDate(): String {
         val request = Request.Builder().url(INDEX_URL).build()
-        val response = client.newCall(request).execute()
-        val body = response.body?.string() ?: throw Exception("empty index page")
+        val body = client.newCall(request).execute().use { response ->
+            if (!response.isSuccessful) throw Exception("index request failed (${response.code})")
+            response.body?.string() ?: throw Exception("empty index page")
+        }
 
         // Try regex: ARCHIVE_DATA[0].date = "YYYY-MM-DD"
         val regex = Regex(""""date"\s*:\s*"(\d{4}-\d{2}-\d{2})"""")
@@ -67,9 +67,10 @@ object ReportFetcher {
     private fun fetchDailyPage(date: String): String {
         val url = "$DAILY_URL/$date.html"
         val request = Request.Builder().url(url).build()
-        val response = client.newCall(request).execute()
-        if (!response.isSuccessful) throw Exception("日报不存在 ($date)")
-        return response.body?.string() ?: throw Exception("empty daily page")
+        return client.newCall(request).execute().use { response ->
+            if (!response.isSuccessful) throw Exception("日报不存在 ($date)")
+            response.body?.string() ?: throw Exception("empty daily page")
+        }
     }
 
     // ---------- Step 3: parse HTML ----------

@@ -13,7 +13,7 @@
         android:theme="@style/Theme.CyberSecDaily"
         android:usesCleartextTraffic="false">
 
-        <!-- Widget Receiver (Glance) -->
+        <!-- Native App Widget receiver -->
         <receiver
             android:name=".CyberSecDailyWidgetReceiver"
             android:exported="true">
