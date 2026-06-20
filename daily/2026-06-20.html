@@ -415,7 +415,7 @@
 
         <!-- Keywords Banner -->
         <div class="keywords-banner">
-            <strong>今日关键词：</strong>Klue供应链攻击席卷网安行业 · FortiBleed 86,000台设备凭证泄露 · SocGholish僵尸网络拆除 · ShinyHunters 270万勒索 · Aurora攻击ALS Global · LockBit 5.0 + TheGentlemen
+            <strong>今日关键词：</strong>Klue供应链攻击席卷网安行业 · FortiBleed 86,000台设备凭证泄露 · SocGholish僵尸网络拆除 · ShinyHunters 270万勒索 · Aurora攻击ALS Global · LockBit 5.0 + TheGentlemen · CVE-2026-53519 哪吒监控路径遍历
         </div>
 
         <!-- Main Content -->
@@ -550,25 +550,62 @@
                         </table>
                     </div>
                 </article>
+
+                <!-- Article 7 - CVE-2026-53519 -->
+                <article class="article-card featured">
+                    <span class="article-number">7</span>
+                    <span class="severity-badge severity-critical">严重</span>
+                    <h3 class="article-title">CVE-2026-53519：哪吒监控严重路径遍历漏洞，一个GET请求拿下全站JWT密钥</h3>
+                    <div class="article-meta">
+                        <span>CVSS 9.1 | 影响版本：< 2.0.13 | PoC已公开 | 无需认证</span>
+                        <span class="cvss-score">路径遍历</span>
+                    </div>
+                    <div class="article-body">
+                        <p>哪吒监控（Nezha Monitoring）被披露存在未授权路径遍历漏洞，攻击者无需任何认证，仅通过构造一个 GET 请求即可读取服务器上的敏感配置文件，获取 JWT 签名密钥，进而伪造管理员令牌接管整个面板。</p>
+                        <p><strong>漏洞原理：</strong></p>
+                        <ul>
+                            <li><strong>入口：</strong>构造 <code>/dashboard../data/config.yaml</code></li>
+                            <li><strong>绕过：</strong><code>strings.HasPrefix</code> 前缀检查通过</li>
+                            <li><strong>利用：</strong><code>filepath.Join</code> 拼接路径逃逸出模板目录</li>
+                            <li><strong>结果：</strong>读取 <code>config.yaml</code> 获取 JWT 密钥</li>
+                        </ul>
+                        <p><strong>攻击链：</strong></p>
+                        <ul>
+                            <li>1. <code>GET /dashboard../data/config.yaml</code> → 获取 jwt_secret_key</li>
+                            <li>2. <code>GET /dashboard../data/sqlite.db</code> → 获取用户表、admin ID</li>
+                            <li>3. 用泄露的 HS256 密钥伪造管理员 JWT</li>
+                            <li>4. 以管理员身份登录，完全控制 Dashboard + 所有 Agent</li>
+                        </ul>
+                        <p><strong>值得关注：</strong>哪吒监控在国内自建服务器社区使用率极高，PoC已公开，攻击成本为零。建议立即升级到 v2.0.13+。</p>
+                    </div>
+                    <div class="attack-flow">
+                        <span class="flow-step">构造恶意URL</span>
+                        <span class="flow-step">前缀检查绕过</span>
+                        <span class="flow-step">路径逃逸</span>
+                        <span class="flow-step">读取配置</span>
+                        <span class="flow-step">获取JWT密钥</span>
+                        <span class="flow-step critical">接管面板</span>
+                    </div>
+                </article>
             </div>
 
             <!-- Quick News Section -->
             <h3 class="section-header">速览区</h3>
             <div class="quick-news">
                 <div class="quick-item">
-                    <h4>7. Apple Beats Studio Buds窃听漏洞 CVE-2025-20701</h4>
+                    <h4>8. Apple Beats Studio Buds窃听漏洞 CVE-2025-20701</h4>
                     <p>Airoha蓝牙SDK授权错误（CVSS 8.8），攻击者在蓝牙范围内可无需用户同意配对设备并利用麦克风窃听。固件1B211已修复。</p>
                 </div>
                 <div class="quick-item">
-                    <h4>8. CryptoBandits恶意软件：后门+Tor双重功能</h4>
+                    <h4>9. CryptoBandits恶意软件：后门+Tor双重功能</h4>
                     <p>新型CryptoBandits恶意软件使用本地SOCKS5代理通过Tor路由流量，将数据窃取与远程代码执行功能融合。</p>
                 </div>
                 <div class="quick-item">
-                    <h4>9. Texas政府数据泄露：300万驾照信息曝光</h4>
+                    <h4>10. Texas政府数据泄露：300万驾照信息曝光</h4>
                     <p>德克萨斯州政府系统遭入侵，超过300万驾照信息泄露。</p>
                 </div>
                 <div class="quick-item">
-                    <h4>10. Gravity SMTP WordPress插件信息泄露在野利用</h4>
+                    <h4>11. Gravity SMTP WordPress插件信息泄露在野利用</h4>
                     <p>影响约10万个WordPress网站的信息泄露漏洞正在被攻击者积极利用。</p>
                 </div>
             </div>
@@ -593,16 +630,19 @@ quadrantChart
     "ShinyHunters IC": [0.75, 0.7]
     "Aurora攻击ALS": [0.7, 0.65]
     "LockBit 5.0": [0.6, 0.6]
+    "哪吒监控CVE-2026-53519": [0.95, 0.8]
                     </div>
                 </div>
                 <div class="chart-container">
                     <div class="chart-title">今日安全事件类型分布</div>
                     <div class="mermaid">
 pie title 今日安全事件类型分布
-    "供应链攻击" : 30
-    "勒索软件" : 25
-    "凭证泄露" : 20
-    "执法行动" : 15
+    "供应链攻击" : 25
+    "勒索软件" : 20
+    "凭证泄露" : 15
+    "执法行动" : 10
+    "数据泄露" : 10
+    "路径遍历/漏洞利用" : 20
     "数据泄露" : 10
                     </div>
                 </div>
@@ -621,6 +661,24 @@ flowchart TD
     F --> G[窃取联系人/报价/销售数据]
     G --> H[Icarus组织要求赎金谈判]
     H --> I[威胁泄露数据]
+                </div>
+            </div>
+
+            <!-- Nezha Attack Flow -->
+            <h3 class="section-header">哪吒监控 CVE-2026-53519 攻击链</h3>
+            <div class="chart-container" style="margin-bottom:40px;">
+                <div class="mermaid">
+flowchart TD
+    A[攻击者构造恶意URL] --> B["GET /dashboard../data/config.yaml"]
+    B --> C[strings.HasPrefix通过前缀校验]
+    C --> D[strings.TrimPrefix保留../data/config.yaml]
+    D --> E[filepath.Join拼接路径]
+    E --> F[os.Stat找到文件]
+    F --> G[http.ServeFile返回配置文件]
+    G --> H[获取jwt_secret_key]
+    H --> I[伪造管理员JWT]
+    I --> J[接管Dashboard控制权]
+    J --> K[控制所有Agent]
                 </div>
             </div>
 
@@ -701,6 +759,22 @@ timeline
                     <div class="reference-item">
                         <span class="reference-source">Proofpoint</span>
                         <a href="https://www.proofpoint.com/us/blog/threat-insight/sayonara-socgholish-operation-endgame-disrupts-major-cybercrime-operation/">Sayonara SocGholish Analysis</a>
+                    </div>
+                    <div class="reference-item">
+                        <span class="reference-source">阿里云漏洞库</span>
+                        <a href="https://avd.aliyun.com/detail?id=AVD-2026-53519">CVE-2026-53519 Nezha Monitoring 路径遍历</a>
+                    </div>
+                    <div class="reference-item">
+                        <span class="reference-source">GitHub Advisory</span>
+                        <a href="https://github.com/nezhahq/nezha/security/advisories/GHSA-5c25-7vpj-9mqh">GHSA-5c25-7vpj-9mqh Pre-auth Path Traversal</a>
+                    </div>
+                    <div class="reference-item">
+                        <span class="reference-source">GitHub PoC</span>
+                        <a href="https://github.com/tar-xz/CVE-2026-53519-PoC">CVE-2026-53519-PoC</a>
+                    </div>
+                    <div class="reference-item">
+                        <span class="reference-source">技术分析</span>
+                        <a href="https://blog.caowo.de/posts/nezha-path-traversal-cve-2026-53519/">哪吒监控路径穿越漏洞分析</a>
                     </div>
                 </div>
             </div>
