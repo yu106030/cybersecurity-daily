@@ -421,13 +421,13 @@
         <!-- ========== 日期栏 ========== -->
         <div class="edition-info">
             <span class="edition-date">2026年6月24日 星期三</span>
-            <span class="edition-number">第 31 期 | 总第 31 期</span>
+            <span class="edition-number">第 43 期 | 总第 43 期</span>
             <span>每日精选 · 值得关注</span>
         </div>
 
         <!-- ========== 关键词横幅 ========== -->
         <div class="keywords-banner">
-            <strong>今日关键词：</strong>CISA KEV紧急新增4漏洞 · libssh2预认证RCE PoC公开 · FFmpeg PixelSmash堆溢出 · AI框架漏洞系统性爆发 · MCP协议安全风险
+            <strong>今日关键词：</strong>CISA KEV · AI/ML供应链 · Flowise · picklescan · Ubiquiti UniFi OS · ManageEngine · expr-eval
         </div>
 
         <!-- ========== 正文 ========== -->
@@ -435,8 +435,8 @@
 
             <!-- ===== 头条 ===== -->
             <div class="headline-section">
-                <h2 class="main-headline">CISA紧急新增4个KEV漏洞，libssh2预认证RCE PoC公开引发供应链危机</h2>
-                <p class="sub-headline">Ubiquiti UniFi OS完整攻击链CVSS 10.0，libssh2所有版本受影响，FFmpeg PixelSmash将视频变为武器</p>
+                <h2 class="main-headline">CISA紧急新增四个KEV漏洞 + AI/ML工具集体沦陷</h2>
+                <p class="sub-headline">Ubiquiti UniFi OS三个CVSS 10.0满分漏洞 + Lantronix EDS5000 | Flowise/picklescan/Crawl4AI/Langflow高危漏洞爆发 | 修复截止日6月26日</p>
             </div>
 
             <!-- ===== 文章卡片网格 ===== -->
@@ -445,34 +445,37 @@
                 <!-- ★ Featured 文章（占2列，左侧） -->
                 <article class="article-card featured">
                     <span class="article-number">1</span>
-                    <span class="severity-badge severity-critical">紧急</span>
-                    <h3 class="article-title">CISA紧急新增4个KEV漏洞，Ubiquiti UniFi OS完整攻击链CVSS 10.0</h3>
+                    <span class="severity-badge severity-critical">严重</span>
+                    <h3 class="article-title">CISA紧急新增四个KEV漏洞 — Ubiquiti UniFi OS三连击 + Lantronix EDS5000</h3>
                     <div class="article-meta">
-                        <span>CVE-2026-34910/34909/34908 · CVE-2025-67038</span>
-                        <span class="cvss-score">CVSS 10.0 · 截止6月26日</span>
+                        <span>CVE-2026-34910/34909/34908/2025-67038</span>
+                        <span class="cvss-score">CVSS 10.0 × 3 | 在野利用 | 截止6月26日</span>
                     </div>
                     <div class="article-body">
-                        <p>CISA于6月23日将4个漏洞添加至已知被利用漏洞（KEV）目录，联邦机构需在3天内完成修复。Ubiquiti UniFi OS三个CVE构成完整攻击链，可实现完全设备接管。</p>
+                        <p>CISA于6月23日紧急将四个漏洞添加至已知被利用漏洞（KEV）目录，所有漏洞均已被实际攻击利用。三个Ubiquiti UniFi OS漏洞均为CVSS 10.0满分，可组合利用实现设备完全接管。Lantronix EDS5000是连接OT/ICS环境的桥梁设备，漏洞可能导致工业控制系统沦陷。</p>
                         <p><strong>漏洞机制/攻击方式：</strong></p>
                         <ul>
-                            <li><strong>类型：</strong>访问控制绕过 → 路径遍历 → 命令注入</li>
-                            <li><strong>攻击方式：</strong>网络邻近攻击者无需认证即可利用</li>
-                            <li><strong>影响范围：</strong>所有通过网络可达的UniFi设备</li>
-                            <li><strong>后果：</strong>完全设备接管，Lantronix设备可横向渗透至OT/ICS环境</li>
+                            <li><strong>类型：</strong>命令注入 + 路径遍历 + 访问控制绕过</li>
+                            <li><strong>攻击方式：</strong>无需认证，网络相邻攻击者可直接利用</li>
+                            <li><strong>影响范围：</strong>所有可通过网络访问的UniFi OS设备 + 工业设备服务器</li>
+                            <li><strong>后果：</strong>设备完全接管 → 横向移动 → 工业控制系统沦陷</li>
                         </ul>
                         <p><strong>值得关注的原因：</strong></p>
                         <ul>
-                            <li>CVSS 10.0满分，三个CVE构成完整攻击链</li>
-                            <li>已有已知利用，风险极高，截止日期仅3天</li>
-                            <li>Lantronix设备常用于OT/ICS环境，可能引发工业控制系统安全事件</li>
+                            <li>所有漏洞无需认证即可利用，攻击门槛极低</li>
+                            <li>Ubiquiti设备广泛部署于企业网络，影响范围巨大</li>
+                            <li>三个CVSS 10.0漏洞可组合形成完整攻击链</li>
+                            <li>修复截止日仅剩2天（6月26日），时间紧迫</li>
                         </ul>
                     </div>
+                    <!-- 攻击流程图 -->
                     <div class="attack-flow">
                         <span class="flow-step">攻击者</span>
-                        <span class="flow-step">访问控制绕过</span>
-                        <span class="flow-step">路径遍历</span>
-                        <span class="flow-step">命令注入</span>
-                        <span class="flow-step critical">完全接管</span>
+                        <span class="flow-step">网络扫描</span>
+                        <span class="flow-step">CVE-2026-34908</span>
+                        <span class="flow-step">CVE-2026-34909</span>
+                        <span class="flow-step critical">CVE-2026-34910</span>
+                        <span class="flow-step critical">设备接管</span>
                     </div>
                 </article>
 
@@ -480,49 +483,62 @@
                 <article class="article-card">
                     <span class="article-number">2</span>
                     <span class="severity-badge severity-critical">严重</span>
-                    <h3 class="article-title">libssh2预认证RCE漏洞PoC公开，影响所有历史版本</h3>
+                    <h3 class="article-title">AI/ML工具漏洞爆发 — Flowise/picklescan/Crawl4AI/Langflow集体沦陷</h3>
                     <div class="article-meta">
-                        <span>CVE-2026-55200 · 所有版本 ≤ 1.11.1</span>
-                        <span class="cvss-score">CVSS 9.2 · PoC已公开</span>
+                        <span>CVE-2026-56274/56315/53753/48519</span>
+                        <span class="cvss-score">CVSS 9.9 | 零补丁 | 供应链风险</span>
                     </div>
                     <div class="article-body">
-                        <p>libssh2存在整数溢出漏洞，可导致堆缓冲区越界写入，实现预认证远程代码执行。攻击者仅需诱导客户端连接恶意SSH服务器即可实现RCE。</p>
+                        <p>2026年6月24日成为AI/ML工具安全"黑色星期三"，多个主流AI开发平台同日披露高危漏洞。最严重的是Flowise的MCP Server功能存在OS命令注入漏洞（CVSS 9.9），picklescan作为ML模型安全扫描工具被发现5个绕过漏洞（CVSS 9.8），导致整个ML供应链安全机制失效。</p>
                         <p><strong>受影响组件：</strong></p>
                         <table class="affected-table">
-                            <tr><th>组件</th><th>风险</th></tr>
-                            <tr><td>curl（SCP/SFTP）</td><td class="risk-high">高危</td></tr>
-                            <tr><td>备份软件、文件传输工具</td><td class="risk-high">高危</td></tr>
-                            <tr><td>IoT设备、路由器、NAS</td><td class="risk-high">高危</td></tr>
-                            <tr><td>工业控制器</td><td class="risk-medium">中高危</td></tr>
+                            <tr><th>产品</th><th>CVSS</th><th>漏洞类型</th></tr>
+                            <tr><td>Flowise</td><td class="risk-high">9.9</td><td>OS命令注入</td></tr>
+                            <tr><td>picklescan</td><td class="risk-high">9.8</td><td>安全机制绕过</td></tr>
+                            <tr><td>Crawl4AI</td><td class="risk-high">9.8</td><td>远程代码执行</td></tr>
+                            <tr><td>Langflow</td><td class="risk-medium">9.6</td><td>远程代码执行</td></tr>
                         </table>
+                        <p><strong>关键影响：</strong>picklescan失效意味着所有依赖该工具的组织一直处于"虚假安全感"中，恶意模型可绕过安全检查直接进入生产环境。</p>
                     </div>
                 </article>
 
                 <!-- ★ 普通文章 3 -->
                 <article class="article-card">
                     <span class="article-number">3</span>
-                    <span class="severity-badge severity-critical">严重</span>
-                    <h3 class="article-title">FFmpeg PixelSmash堆溢出漏洞，视频文件变武器</h3>
+                    <span class="severity-badge severity-high">高危</span>
+                    <h3 class="article-title">ManageEngine SSO漏洞 — 四款产品集体中招</h3>
                     <div class="article-meta">
-                        <span>CVE-2026-8461 · FFmpeg < 8.1.2</span>
-                        <span class="cvss-score">CVSS 8.8 · PoC已公开</span>
+                        <span>CVE-2026-11374</span>
+                        <span class="cvss-score">CVSS 9.0 | 会话劫持</span>
                     </div>
                     <div class="article-body">
-                        <p>FFmpeg MagicYUV解码器存在堆越界写入漏洞，攻击者可构造恶意视频文件实现RCE。影响Jellyfin、Kodi、Emby、Nextcloud等数百款应用。</p>
+                        <p>ManageEngine旗下四款产品（包括ADSelfService Plus）存在SSO令牌随机性不足漏洞，可导致会话劫持攻击。攻击者可预测令牌值，冒充合法用户访问企业资源。</p>
+                        <p><strong>漏洞机制：</strong></p>
+                        <ul>
+                            <li><strong>类型：</strong>SSO令牌随机性不足</li>
+                            <li><strong>攻击方式：</strong>令牌预测 → 会话劫持 → 权限提升</li>
+                            <li><strong>影响：</strong>整个企业目录的统一认证入口</li>
+                        </ul>
                     </div>
                 </article>
 
                 <!-- ★ 普通文章 4 -->
                 <article class="article-card">
                     <span class="article-number">4</span>
-                    <span class="severity-badge severity-critical">严重</span>
-                    <h3 class="article-title">AI框架漏洞系统性爆发，Flowise/picklescan高危漏洞</h3>
+                    <span class="severity-badge severity-high">高危</span>
+                    <h3 class="article-title">expr-eval JavaScript库漏洞 — 200万周下载量的定时炸弹</h3>
                     <div class="article-meta">
-                        <span>CVE-2026-56274/56315/7574</span>
-                        <span class="cvss-score">CVSS 9.9/9.8/8.7</span>
+                        <span>CVE-2026-12866</span>
+                        <span class="cvss-score">CVSS 9.8 | 无补丁 | 所有版本</span>
                     </div>
                     <div class="article-body">
-                        <p>本日出现多个AI相关框架高危漏洞，Flowise命令注入CVSS 9.9，picklescan安全绕过CVSS 9.8，AI基础设施已成为最活跃的漏洞攻击面。</p>
+                        <p>流行的JavaScript表达式评估库expr-eval存在任意代码执行漏洞，所有版本受影响，暂无通用补丁。该库周下载量超过200万，广泛应用于在线计算器、表单验证、配置解析等场景。</p>
+                        <p><strong>风险分析：</strong></p>
+                        <ul>
+                            <li><strong>广泛使用：</strong>大量前端和后端项目依赖</li>
+                            <li><strong>无补丁：</strong>只能通过替换库或添加输入验证缓解</li>
+                            <li><strong>供应链：</strong>通过npm依赖链传播，难以全面排查</li>
+                        </ul>
                     </div>
                 </article>
 
@@ -530,190 +546,190 @@
                 <article class="article-card">
                     <span class="article-number">5</span>
                     <span class="severity-badge severity-high">高危</span>
-                    <h3 class="article-title">MCP协议安全风险引爆关注，AI Agent供应链安全问题突出</h3>
+                    <h3 class="article-title">持续跟踪：Splunk/Cisco SD-WAN KEV逾期 — 在野利用仍在继续</h3>
                     <div class="article-meta">
-                        <span>AI Agent生态新威胁</span>
-                        <span class="cvss-score">攻击面扩大</span>
+                        <span>CVE-2026-20253/20262</span>
+                        <span class="cvss-score">已逾期 | 积极利用中</span>
                     </div>
                     <div class="article-body">
-                        <p>随着AI Agent生态爆发，MCP工具投毒已成为新的攻击面，恶意MCP Server可在不可见处改写Agent行为，实现本地RCE。</p>
+                        <p>两个之前披露的KEV漏洞已超过修复截止日，但仍在被积极利用。Splunk Enterprise CVE-2026-20253（截止日6月21日）和Cisco SD-WAN CVE-2026-20262（截止日6月23日）均已逾期，风险持续升高。</p>
+                        <p><strong>逾期状态：</strong></p>
+                        <table class="affected-table">
+                            <tr><th>CVE</th><th>产品</th><th>状态</th></tr>
+                            <tr><td>CVE-2026-20253</td><td>Splunk Enterprise</td><td class="risk-high">逾期3天</td></tr>
+                            <tr><td>CVE-2026-20262</td><td>Cisco SD-WAN</td><td class="risk-high">逾期1天</td></tr>
+                        </table>
                     </div>
                 </article>
+
             </div>
 
             <!-- ===== 速览区 ===== -->
             <h3 class="section-header">速览区</h3>
             <div class="quick-news">
                 <div class="quick-item">
-                    <h4>6. Poweradmin完全账户接管漏洞（CVE-2026-54588）</h4>
-                    <p>CVSS 9.6，Host Header注入导致认证绕过，无需凭据即可完全接管账户，影响Poweradmin < 4.2.4/4.3.3</p>
+                    <h4>6. Node.js TLS主机名验证绕过漏洞（CVE-2026-48618）</h4>
+                    <p>Node.js被披露存在TLS主机名验证绕过漏洞，攻击者可利用Unicode点分隔符处理差异，绕过TLS通配符证书的深度校验，可能导致中间人攻击或数据窃听。</p>
                 </div>
                 <div class="quick-item">
-                    <h4>7. Splunk AI Toolkit命令注入（CVE-2026-20266）</h4>
-                    <p>CVSS 9.1，已被在野利用（CISA KEV），影响Splunk AI Toolkit < 5.7.4，需立即升级</p>
+                    <h4>7. Red Hat Ansible Automation Platform 2.5高危漏洞（CVE-2026-11807，CVSS 9.6）</h4>
+                    <p>Ansible自动化平台存在远程代码执行漏洞，CVSS 9.6分。该漏洞可让攻击者通过特制 playbook 执行任意代码，影响使用Ansible进行自动化运维的企业环境。</p>
                 </div>
                 <div class="quick-item">
-                    <h4>8. ManageEngine SSO令牌可预测（CVE-2026-11374）</h4>
-                    <p>CVSS 9.0，SSO令牌随机性不足导致跨四款产品会话劫持，影响ADSelfService Plus等</p>
+                    <h4>8. Electron Framework远程代码执行（CVE-2026-54257，CVSS 9.3）</h4>
+                    <p>Electron框架存在远程代码执行漏洞，影响基于Electron的桌面应用（如VS Code、Slack、Discord等）。攻击者可通过恶意网页或文档触发漏洞。</p>
                 </div>
                 <div class="quick-item">
-                    <h4>9. FortiBleed大规模凭证窃取行动持续</h4>
-                    <p>攻击者在FortiGate设备部署自定义嗅窃取凭证，约43万台设备受影响，累计窃取约1.1亿凭证</p>
+                    <h4>9. Immich/GV-I/O Box 4E零日漏洞（无补丁）</h4>
+                    <p>开源照片管理平台Immich和GeoVision GV-I/O Box 4E设备被发现存在零日漏洞，披露时无可用补丁。建议隔离受影响服务，限制外部访问。</p>
                 </div>
             </div>
 
-            <!-- ===== 风险分析图表 ===== -->
-            <h3 class="section-header">风险分析</h3>
+            <!-- ===== 图表区 ===== -->
+            <h3 class="section-header">今日态势分析</h3>
             <div class="charts-grid">
                 <div class="chart-container">
-                    <div class="chart-title">漏洞严重性 × 利用状态象限</div>
+                    <div class="chart-title">今日关键漏洞类型分布</div>
                     <div class="mermaid">
-quadrantChart
-    title 今日漏洞严重性 × 利用状态
-    x-axis "未利用" --> "在野利用"
-    y-axis "低危" --> "严重"
-    quadrant-1 "紧急修复"
-    quadrant-2 "密切关注"
-    quadrant-3 "持续监控"
-    quadrant-4 "常规更新"
-    "CVE-2026-34910": [0.9, 0.95]
-    "CVE-2026-55200": [0.85, 0.92]
-    "CVE-2026-8461": [0.8, 0.88]
-    "CVE-2026-56274": [0.75, 0.99]
-    "CVE-2026-20266": [0.95, 0.91]
+pie
+    title 今日关键漏洞类型分布
+    "远程代码执行 (RCE)" : 45
+    "命令注入" : 25
+    "安全机制绕过" : 15
+    "访问控制绕过" : 10
+    "其他" : 5
                     </div>
                 </div>
                 <div class="chart-container">
-                    <div class="chart-title">安全事件类型分布</div>
+                    <div class="chart-title">AI/ML工具漏洞影响链</div>
                     <div class="mermaid">
-pie title 安全事件类型分布
-    "命令注入" : 4
-    "堆溢出/内存破坏" : 3
-    "认证绕过" : 2
-    "供应链安全" : 2
-    "其他" : 2
+flowchart TB
+    subgraph AI_Tools[AI/ML工具漏洞影响链]
+        A[Flowise<br/>CVSS 9.9] --> B[命令注入<br/>MCP Server]
+        C[picklescan<br/>CVSS 9.8] --> D[安全机制绕过<br/>5个CVE]
+        E[Crawl4AI<br/>CVSS 9.8] --> F[远程代码执行]
+        G[Langflow<br/>CVSS 9.6] --> H[远程代码执行]
+    end
+    
+    subgraph Impact[影响范围]
+        I[企业AI平台] --> J[模型供应链]
+        J --> K[生产环境]
+        K --> L[数据泄露/系统控制]
+    end
+    
+    AI_Tools --> Impact
+    
+    style A fill:#ff6b6b,color:white
+    style C fill:#ff6b6b,color:white
+    style E fill:#ffa500,color:white
+    style G fill:#ffa500,color:white
                     </div>
                 </div>
             </div>
 
-            <!-- ===== 攻击链分析 ===== -->
-            <h3 class="section-header">关键攻击链分析</h3>
-            <div class="chart-container" style="margin-bottom: 40px;">
-                <div class="mermaid">
-flowchart TD
-    A[攻击者] --> B[Ubiquiti UniFi OS]
-    B --> C[访问控制绕过<br>CVE-2026-34908]
-    C --> D[路径遍历<br>CVE-2026-34909]
-    D --> E[命令注入<br>CVE-2026-34910]
-    E --> F[完全设备接管]
-    
-    G[攻击者] --> H[恶意SSH服务器]
-    H --> I[libssh2客户端连接]
-    I --> J[整数溢出触发]
-    J --> K[堆越界写入]
-    K --> L[远程代码执行]
-    
-    M[攻击者] --> N[恶意视频文件]
-    N --> O[FFmpeg解码]
-    O --> P[堆越界写入]
-    P --> Q[RCE/DoS]
-                </div>
-            </div>
-
-            <!-- ===== 本周时间线 ===== -->
-            <h3 class="section-header">本周事件时间线</h3>
-            <div class="timeline-section">
-                <div class="mermaid">
+            <div class="charts-grid">
+                <div class="chart-container">
+                    <div class="chart-title">CISA KEV修复时间线（6月21-26日）</div>
+                    <div class="mermaid">
 timeline
-    title 2026年6月第4周网安事件
-    6月18日 : FortiBleed凭据泄露首次披露
-           : CISA发布Fortinet加固公告
-           : GentleKiller ESET研究报告发布
-    6月19日 : Splunk CVE-2026-20253 CISA KEV收录
-           : F5 NGINX双9.2漏洞修补
-           : Cisco ISE命令执行漏洞
-    6月20日 : Azure AD/Synapse CVSS 10漏洞
-           : pgAdmin 4多个关键漏洞
-           : Prinz Eugen勒索软件出现
-    6月21日 : Splunk KEV截止日期
-           : AryStinger僵尸网络曝光
-           : GentleKiller技术细节公开
-    6月22日 : FortiBleed攻击升级(86K设备)
-           : Claude AI本月第3次宕机
-           : Krispy Kreme索赔截止日
-    6月23日 : CISA新增4个KEV漏洞
-           : Ubiquiti UniFi OS攻击链曝光
-           : libssh2预认证RCE PoC公开
-    6月24日 : FFmpeg PixelSmash堆溢出PoC
-           : AI框架漏洞系统性爆发
-           : MCP协议安全风险引爆关注
+    title CISA KEV修复时间线（6月21-26日）
+    section 已逾期
+        6月21日 : Splunk CVE-2026-20253 : 逾期3天
+        6月23日 : Cisco SD-WAN CVE-2026-20262 : 逾期1天
+    section 即将截止
+        6月26日 : Ubiquiti UniFi OS x3 : 剩余2天
+        6月26日 : Lantronix EDS5000 : 剩余2天
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <div class="chart-title">今日关键数字</div>
+                    <div class="mermaid">
+quadrantChart
+    title 漏洞严重性 × 利用状态
+    x-axis "低利用风险" --> "高利用风险"
+    y-axis "低严重性" --> "高严重性"
+    quadrant-1 "立即修复"
+    quadrant-2 "重点关注"
+    quadrant-3 "持续监控"
+    quadrant-4 "常规管理"
+    "CVE-2026-34910": [0.95, 0.98]
+    "CVE-2026-56274": [0.85, 0.95]
+    "CVE-2026-56315": [0.80, 0.92]
+    "CVE-2026-12866": [0.75, 0.90]
+    "CVE-2026-11374": [0.70, 0.85]
+    "CVE-2026-20253": [0.90, 0.80]
+    "CVE-2026-20262": [0.88, 0.78]
+                    </div>
                 </div>
             </div>
 
-            <!-- ===== 出处链接 ===== -->
-            <h3 class="section-header">相关出处</h3>
+            <!-- ===== 行动优先级 ===== -->
+            <h3 class="section-header">今日行动优先级</h3>
+            <div class="article-body">
+                <p><strong>1.【最紧急 - 6月26日截止】</strong> Ubiquiti UniFi OS三个CVSS 10.0漏洞 + Lantronix EDS5000</p>
+                <p><strong>2.【紧急 - 已逾期】</strong> Splunk CVE-2026-20253 + Cisco SD-WAN CVE-2026-20262</p>
+                <p><strong>3.【高危 - AI供应链】</strong> picklescan重新扫描所有ML模型 + Flowise升级</p>
+                <p><strong>4.【高危 - 广泛影响】</strong> ManageEngine SSO漏洞 + expr-eval库漏洞</p>
+                <p><strong>5.【持续监控】</strong> 所有无补丁漏洞的缓解措施有效性</p>
+            </div>
+
+            <!-- ===== 参考资源 ===== -->
             <div class="references-section">
+                <h3 class="section-header">参考资源</h3>
                 <div class="references-grid">
                     <div class="reference-item">
-                        <span class="reference-source">CISA KEV Catalog</span>
-                        <a href="https://www.cisa.gov/news-events/alerts/2026/06/23/cisa-adds-four-known-exploited-vulnerabilities-catalog">CISA Adds Four Known Exploited Vulnerabilities</a>
+                        <span class="reference-source">CVE Brief</span>
+                        <a href="https://cvebrief.com/" target="_blank">https://cvebrief.com/</a>
                     </div>
                     <div class="reference-item">
-                        <span class="reference-source">Threat-Modeling.com</span>
-                        <a href="https://threat-modeling.com/vulnerability-intelligence-report-june-24-2026/">Vulnerability Intelligence Report — June 24, 2026</a>
+                        <span class="reference-source">Threat-Modeling</span>
+                        <a href="https://threat-modeling.com/vulnerability-intelligence-report-june-24-2026/" target="_blank">漏洞情报报告</a>
                     </div>
                     <div class="reference-item">
-                        <span class="reference-source">CSDN安全情报</span>
-                        <a href="https://blog.csdn.net/weixin_45635831/article/details/162261701">每日安全情报报告 · 2026-06-24</a>
+                        <span class="reference-source">CISA KEV</span>
+                        <a href="https://www.cisa.gov/known-exploited-vulnerabilities-catalog" target="_blank">已知被利用漏洞目录</a>
                     </div>
                     <div class="reference-item">
-                        <span class="reference-source">GitHub PoC</span>
-                        <a href="https://github.com/bikini/exploitarium/tree/main/libssh2-cve-2026-55200-poc">libssh2 CVE-2026-55200 PoC</a>
+                        <span class="reference-source">Flowise CVE-2026-56274</span>
+                        <a href="https://threat-modeling.com/cve-2026-56274-flowise-ai-mcp-server-os-command-injection/" target="_blank">漏洞详情</a>
                     </div>
                     <div class="reference-item">
-                        <span class="reference-source">GitHub PoC</span>
-                        <a href="https://github.com/anyanything/CVE-2026-8461-PoC">FFmpeg CVE-2026-8461 PoC</a>
+                        <span class="reference-source">picklescan绕过</span>
+                        <a href="https://threat-modeling.com/picklescan-bypass-vulnerabilities-ml-supply-chain-5-cves/" target="_blank">5个CVE详情</a>
                     </div>
                     <div class="reference-item">
-                        <span class="reference-source">FreeBuf</span>
-                        <a href="https://www.freebuf.com/articles/system/487269.html">libssh2漏洞分析</a>
+                        <span class="reference-source">Ubiquiti安全公告</span>
+                        <a href="https://community.ui.com/releases" target="_blank">安全公告064</a>
                     </div>
                     <div class="reference-item">
-                        <span class="reference-source">JFrog Blog</span>
-                        <a href="https://jfrog.com/blog/pixelsmash-critical-ffmpeg-vulnerability-turns-media-files-into-weapons/">FFmpeg PixelSmash漏洞分析</a>
+                        <span class="reference-source">ManageEngine</span>
+                        <a href="https://www.manageengine.com/security/advisory.html" target="_blank">安全公告</a>
                     </div>
                     <div class="reference-item">
-                        <span class="reference-source">FreeBuf</span>
-                        <a href="https://www.freebuf.com/articles/database/487153.html">FortiBleed行动技术分析</a>
+                        <span class="reference-source">NVD - CVE-2026-56315</span>
+                        <a href="https://nvd.nist.gov/vuln/detail/CVE-2026-56315" target="_blank">漏洞详情</a>
                     </div>
                     <div class="reference-item">
-                        <span class="reference-source">FreeBuf</span>
-                        <a href="https://www.freebuf.com/articles/vuls/486943.html">MCP工具投毒到本地RCE</a>
+                        <span class="reference-source">CISA BOD 26-04</span>
+                        <a href="https://www.cisa.gov/directives/bod-26-04" target="_blank">指令详情</a>
                     </div>
                     <div class="reference-item">
-                        <span class="reference-source">Splunk Advisory</span>
-                        <a href="https://advisory.splunk.com/advisories/SVD-2026-0614">Splunk AI Toolkit安全公告</a>
-                    </div>
-                    <div class="reference-item">
-                        <span class="reference-source">BleepingComputer</span>
-                        <a href="https://www.bleepingcomputer.com/news/security/whatsapp-phishing-attack-uses-fake-business-docs-to-hack-pcs/">WhatsApp钓鱼攻击</a>
-                    </div>
-                    <div class="reference-item">
-                        <span class="reference-source">The Hacker News</span>
-                        <a href="https://thehackernews.com/2026/06/researchers-detail-difytap-flaws-in.html">DifyTap AI平台漏洞</a>
+                        <span class="reference-source">SharkStriker</span>
+                        <a href="https://sharkstriker.com/blog/june-2026-data-breaches/" target="_blank">6月数据泄露</a>
                     </div>
                 </div>
             </div>
+
         </div>
 
         <!-- ========== 页脚 ========== -->
         <footer class="newspaper-footer">
-            <div class="footer-logo">AI城 · 网安日报</div>
-            <p class="footer-disclaimer">
-                免责声明：本报告基于公开信息整理，CVE编号、CVSS评分等数据以官方源为准。建议读者查阅原始来源获取最新动态。
-                <br>
-                每日精选 · 值得关注 | 2026年6月24日
-            </p>
+            <div class="footer-logo">网安日报速递 · CYBERSECURITY DAILY EXPRESS</div>
+            <div class="footer-disclaimer">
+                <p>编辑: Lin @ WorkBuddy | 发布时间: 2026-06-24 12:30 GMT+8</p>
+                <p>数据来源: CVE Brief, Threat-Modeling, CISA KEV, NVD, BleepingComputer, SecurityWeek</p>
+                <p>免责声明: 本报告仅供安全研究参考，不构成任何安全建议。请根据实际情况制定安全策略。</p>
+            </div>
         </footer>
     </div>
 
