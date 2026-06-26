@@ -21,7 +21,11 @@
             --shadow-dark: rgba(0,0,0,0.3);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
         body {
             background: var(--ink-black);
@@ -53,7 +57,6 @@
             z-index: 1;
         }
 
-        /* ========== Masthead ========== */
         .masthead {
             background: var(--ink-black);
             color: var(--paper-cream);
@@ -89,7 +92,6 @@
             margin-bottom: 10px;
         }
 
-        /* ========== Edition Info ========== */
         .edition-info {
             display: flex;
             justify-content: space-between;
@@ -103,7 +105,6 @@
         .edition-date { font-weight: 700; color: var(--accent-red); }
         .edition-number { font-style: italic; }
 
-        /* ========== Keywords Banner ========== */
         .keywords-banner {
             background: linear-gradient(90deg, var(--accent-red), var(--accent-orange));
             color: white;
@@ -113,14 +114,12 @@
         }
         .keywords-banner strong { margin-right: 10px; }
 
-        /* ========== Content ========== */
         .content-wrapper {
             padding: 30px 40px;
             position: relative;
             z-index: 2;
         }
 
-        /* ========== Headlines ========== */
         .headline-section {
             margin-bottom: 40px;
             border-bottom: 3px solid var(--ink-black);
@@ -144,7 +143,6 @@
             padding-left: 26px;
         }
 
-        /* ========== Article Grid ========== */
         .articles-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -178,7 +176,6 @@
             border-radius: 50%;
         }
 
-        /* ========== Severity Badges ========== */
         .severity-badge {
             display: inline-block;
             padding: 3px 12px;
@@ -192,7 +189,6 @@
         .severity-high { background: var(--accent-orange); color: white; }
         .severity-medium { background: var(--accent-gold); color: var(--ink-black); }
 
-        /* ========== Article Content ========== */
         .article-title {
             font-family: 'Playfair Display', 'Noto Serif SC', serif;
             font-size: 1.5em;
@@ -223,10 +219,9 @@
             color: var(--ink-dark);
         }
         .article-body p { margin-bottom: 12px; text-indent: 2em; }
-        .article-body ul, .article-body ol { margin: 10px 0; padding-left: 2em; }
+        .article-body ul { margin: 10px 0; padding-left: 2em; }
         .article-body li { margin-bottom: 5px; }
 
-        /* ========== Section Headers ========== */
         .section-header {
             font-family: 'Playfair Display', 'Noto Serif SC', serif;
             font-size: 1.8em;
@@ -245,7 +240,6 @@
             font-size: 1.2em;
         }
 
-        /* ========== Quick News ========== */
         .quick-news {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -260,7 +254,6 @@
         .quick-item h4 { font-size: 1.1em; margin-bottom: 8px; color: var(--ink-black); }
         .quick-item p { font-size: 0.9em; color: var(--ink-dark); }
 
-        /* ========== Charts ========== */
         .charts-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -281,7 +274,6 @@
         }
         .mermaid { display: flex; justify-content: center; }
 
-        /* ========== Attack Flow ========== */
         .attack-flow {
             display: flex;
             align-items: center;
@@ -311,7 +303,6 @@
         .flow-step:last-child::after { display: none; }
         .flow-step.critical { background: var(--accent-red); }
 
-        /* ========== Tables ========== */
         .affected-table {
             width: 100%;
             border-collapse: collapse;
@@ -331,7 +322,6 @@
         .risk-high { color: var(--accent-red); font-weight: 700; }
         .risk-medium { color: var(--accent-orange); font-weight: 700; }
 
-        /* ========== References ========== */
         .references-section {
             background: var(--paper-aged);
             padding: 30px;
@@ -362,7 +352,6 @@
             margin-bottom: 5px;
         }
 
-        /* ========== Footer ========== */
         .newspaper-footer {
             background: var(--ink-black);
             color: var(--paper-cream);
@@ -384,7 +373,6 @@
             line-height: 1.6;
         }
 
-        /* ========== Responsive ========== */
         @media (max-width: 1024px) {
             .articles-grid { grid-template-columns: repeat(2, 1fr); }
             .article-card.featured { grid-column: span 2; }
@@ -411,325 +399,366 @@
 </head>
 <body>
     <div class="newspaper">
-        <!-- ========== 报头 ========== -->
+        <!-- Masthead -->
         <header class="masthead">
             <div class="newspaper-subtitle">AI城 · 网络安全</div>
             <h1 class="newspaper-title">网安日报速递</h1>
             <div class="newspaper-subtitle">CYBERSECURITY DAILY EXPRESS</div>
         </header>
 
-        <!-- ========== 日期栏 ========== -->
+        <!-- Edition Info -->
         <div class="edition-info">
-            <span class="edition-date">2026年6月24日 星期三</span>
-            <span class="edition-number">第 43 期 | 总第 43 期</span>
+            <span class="edition-date">2026年6月24日 星期二</span>
+            <span class="edition-number">第 42 期 | 总第 42 期</span>
             <span>每日精选 · 值得关注</span>
         </div>
 
-        <!-- ========== 关键词横幅 ========== -->
+        <!-- Keywords Banner -->
         <div class="keywords-banner">
-            <strong>今日关键词：</strong>CISA KEV · AI/ML供应链 · Flowise · picklescan · Ubiquiti UniFi OS · ManageEngine · expr-eval
+            <strong>今日关键词：</strong>CISA四漏洞KEV紧急修复 | Tata Electronics 630GB泄露 | curl 25年老漏洞修复 | Secure Boot证书过期 | LastPass供应链泄露 | Chrome扩展后门
         </div>
 
-        <!-- ========== 正文 ========== -->
+        <!-- Main Content -->
         <div class="content-wrapper">
-
-            <!-- ===== 头条 ===== -->
+            <!-- Main Headline -->
             <div class="headline-section">
-                <h2 class="main-headline">CISA紧急新增四个KEV漏洞 + AI/ML工具集体沦陷</h2>
-                <p class="sub-headline">Ubiquiti UniFi OS三个CVSS 10.0满分漏洞 + Lantronix EDS5000 | Flowise/picklescan/Crawl4AI/Langflow高危漏洞爆发 | 修复截止日6月26日</p>
+                <h2 class="main-headline">CISA紧急新增四个KEV漏洞 — Ubiquiti UniFi OS三连击 + Lantronix远程代码执行，6月26日修复截止</h2>
+                <p class="sub-headline">三个UniFi OS漏洞可链式利用实现未授权访问→文件读取→命令注入→root提权，勒索软件运营商可能已在利用</p>
             </div>
 
-            <!-- ===== 文章卡片网格 ===== -->
+            <!-- Featured Articles -->
             <div class="articles-grid">
-
-                <!-- ★ Featured 文章（占2列，左侧） -->
+                <!-- Featured Article 1 -->
                 <article class="article-card featured">
                     <span class="article-number">1</span>
-                    <span class="severity-badge severity-critical">严重</span>
-                    <h3 class="article-title">CISA紧急新增四个KEV漏洞 — Ubiquiti UniFi OS三连击 + Lantronix EDS5000</h3>
+                    <span class="severity-badge severity-critical">紧急</span>
+                    <h3 class="article-title">CISA新增四个KEV漏洞 — Ubiquiti UniFi OS三连击 + Lantronix EDS5000</h3>
                     <div class="article-meta">
-                        <span>CVE-2026-34910/34909/34908/2025-67038</span>
-                        <span class="cvss-score">CVSS 10.0 × 3 | 在野利用 | 截止6月26日</span>
+                        <span>CVE-2026-34908/34909/34910 + CVE-2025-67038 | 修复截止：6月26日</span>
+                        <span class="cvss-score">在野利用</span>
                     </div>
                     <div class="article-body">
-                        <p>CISA于6月23日紧急将四个漏洞添加至已知被利用漏洞（KEV）目录，所有漏洞均已被实际攻击利用。三个Ubiquiti UniFi OS漏洞均为CVSS 10.0满分，可组合利用实现设备完全接管。Lantronix EDS5000是连接OT/ICS环境的桥梁设备，漏洞可能导致工业控制系统沦陷。</p>
-                        <p><strong>漏洞机制/攻击方式：</strong></p>
-                        <ul>
-                            <li><strong>类型：</strong>命令注入 + 路径遍历 + 访问控制绕过</li>
-                            <li><strong>攻击方式：</strong>无需认证，网络相邻攻击者可直接利用</li>
-                            <li><strong>影响范围：</strong>所有可通过网络访问的UniFi OS设备 + 工业设备服务器</li>
-                            <li><strong>后果：</strong>设备完全接管 → 横向移动 → 工业控制系统沦陷</li>
-                        </ul>
+                        <p>CISA于6月23日将四个在野利用的漏洞添加到KEV目录。其中三个影响Ubiquiti UniFi OS，可被链式利用实现未授权访问、文件读取和命令注入；另一个影响Lantronix EDS5000设备，允许远程命令执行。</p>
+                        <table class="affected-table">
+                            <tr><th>CVE</th><th>产品</th><th>类型</th><th>风险</th></tr>
+                            <tr><td>CVE-2026-34908</td><td>UniFi OS</td><td>访问控制不当</td><td class="risk-high">未授权修改配置</td></tr>
+                            <tr><td>CVE-2026-34909</td><td>UniFi OS</td><td>路径遍历</td><td class="risk-high">读取系统文件</td></tr>
+                            <tr><td>CVE-2026-34910</td><td>UniFi OS</td><td>输入验证不当</td><td class="risk-high">命令注入</td></tr>
+                            <tr><td>CVE-2025-67038</td><td>Lantronix EDS5000</td><td>代码注入</td><td class="risk-medium">远程命令执行</td></tr>
+                        </table>
                         <p><strong>值得关注的原因：</strong></p>
                         <ul>
-                            <li>所有漏洞无需认证即可利用，攻击门槛极低</li>
-                            <li>Ubiquiti设备广泛部署于企业网络，影响范围巨大</li>
-                            <li>三个CVSS 10.0漏洞可组合形成完整攻击链</li>
-                            <li>修复截止日仅剩2天（6月26日），时间紧迫</li>
+                            <li>三个UniFi OS漏洞可链式利用：访问控制绕过 → 路径遍历 → 命令注入 → root</li>
+                            <li>UniFi设备广泛部署于企业网络核心，一旦沦陷可横向移动</li>
+                            <li>CISA联邦机构修复截止日为6月26日，仅剩2天</li>
+                            <li>勒索软件运营商可能利用此链入侵企业网络</li>
                         </ul>
                     </div>
-                    <!-- 攻击流程图 -->
                     <div class="attack-flow">
-                        <span class="flow-step">攻击者</span>
-                        <span class="flow-step">网络扫描</span>
-                        <span class="flow-step">CVE-2026-34908</span>
-                        <span class="flow-step">CVE-2026-34909</span>
-                        <span class="flow-step critical">CVE-2026-34910</span>
-                        <span class="flow-step critical">设备接管</span>
+                        <span class="flow-step">网络访问</span>
+                        <span class="flow-step">CVE-34908绕过</span>
+                        <span class="flow-step">CVE-34909遍历</span>
+                        <span class="flow-step critical">CVE-34910注入</span>
+                        <span class="flow-step critical">root权限</span>
                     </div>
                 </article>
 
-                <!-- ★ 普通文章 2 -->
+                <!-- Article 2 -->
                 <article class="article-card">
                     <span class="article-number">2</span>
                     <span class="severity-badge severity-critical">严重</span>
-                    <h3 class="article-title">AI/ML工具漏洞爆发 — Flowise/picklescan/Crawl4AI/Langflow集体沦陷</h3>
+                    <h3 class="article-title">Tata Electronics遭World Leaks勒索 — 630GB Apple/Tesla机密泄露</h3>
                     <div class="article-meta">
-                        <span>CVE-2026-56274/56315/53753/48519</span>
-                        <span class="cvss-score">CVSS 9.9 | 零补丁 | 供应链风险</span>
+                        <span>200,000+文件 | World Leaks组织</span>
+                        <span class="cvss-score">数据泄露</span>
                     </div>
                     <div class="article-body">
-                        <p>2026年6月24日成为AI/ML工具安全"黑色星期三"，多个主流AI开发平台同日披露高危漏洞。最严重的是Flowise的MCP Server功能存在OS命令注入漏洞（CVSS 9.9），picklescan作为ML模型安全扫描工具被发现5个绕过漏洞（CVSS 9.8），导致整个ML供应链安全机制失效。</p>
-                        <p><strong>受影响组件：</strong></p>
-                        <table class="affected-table">
-                            <tr><th>产品</th><th>CVSS</th><th>漏洞类型</th></tr>
-                            <tr><td>Flowise</td><td class="risk-high">9.9</td><td>OS命令注入</td></tr>
-                            <tr><td>picklescan</td><td class="risk-high">9.8</td><td>安全机制绕过</td></tr>
-                            <tr><td>Crawl4AI</td><td class="risk-high">9.8</td><td>远程代码执行</td></tr>
-                            <tr><td>Langflow</td><td class="risk-medium">9.6</td><td>远程代码执行</td></tr>
-                        </table>
-                        <p><strong>关键影响：</strong>picklescan失效意味着所有依赖该工具的组织一直处于"虚假安全感"中，恶意模型可绕过安全检查直接进入生产环境。</p>
-                    </div>
-                </article>
-
-                <!-- ★ 普通文章 3 -->
-                <article class="article-card">
-                    <span class="article-number">3</span>
-                    <span class="severity-badge severity-high">高危</span>
-                    <h3 class="article-title">ManageEngine SSO漏洞 — 四款产品集体中招</h3>
-                    <div class="article-meta">
-                        <span>CVE-2026-11374</span>
-                        <span class="cvss-score">CVSS 9.0 | 会话劫持</span>
-                    </div>
-                    <div class="article-body">
-                        <p>ManageEngine旗下四款产品（包括ADSelfService Plus）存在SSO令牌随机性不足漏洞，可导致会话劫持攻击。攻击者可预测令牌值，冒充合法用户访问企业资源。</p>
-                        <p><strong>漏洞机制：</strong></p>
+                        <p>印度电子制造巨头Tata Electronics确认遭受勒索软件攻击。World Leaks在暗网发布超过20万份文件（630GB），包含Apple iPhone制造数据和Tesla零件设计。</p>
                         <ul>
-                            <li><strong>类型：</strong>SSO令牌随机性不足</li>
-                            <li><strong>攻击方式：</strong>令牌预测 → 会话劫持 → 权限提升</li>
-                            <li><strong>影响：</strong>整个企业目录的统一认证入口</li>
+                            <li>Apple工厂数据、质量检查标准、iPhone电路板组件规范</li>
+                            <li>Tesla NV36充电口控制器设计、Project Highland工程图纸</li>
+                            <li>员工护照副本（含外籍员工）</li>
+                            <li>Tata制造约1/3的Apple iPhone产量（印度）</li>
                         </ul>
                     </div>
                 </article>
 
-                <!-- ★ 普通文章 4 -->
+                <!-- Article 3 -->
+                <article class="article-card">
+                    <span class="article-number">3</span>
+                    <span class="severity-badge severity-critical">严重</span>
+                    <h3 class="article-title">curl 8.21.0发布 — 修复25年老漏洞CVE-2026-8932及18个CVE</h3>
+                    <div class="article-meta">
+                        <span>300亿设备受影响 | AI辅助发现</span>
+                        <span class="cvss-score">立即更新</span>
+                    </div>
+                    <div class="article-body">
+                        <p>curl维护者Daniel Stenberg于6月24日发布curl 8.21.0，修复创纪录的18个CVE。CVE-2026-8932是curl历史上最古老的安全漏洞，潜伏超过25年。</p>
+                        <ul>
+                            <li><strong>CVE-2026-8932：</strong>mTLS连接复用缺陷，认证绕过</li>
+                            <li><strong>CVE-2026-8926：</strong>netrc凭据处理，密码混淆</li>
+                            <li><strong>CVE-2026-8925：</strong>SASL认证double-free</li>
+                            <li><strong>CVE-2026-9080：</strong>HTTP/2流依赖use-after-free</li>
+                            <li>AISLE平台发现6个CVE，Anthropic Mythos触发审计浪潮</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <!-- Article 4 -->
                 <article class="article-card">
                     <span class="article-number">4</span>
                     <span class="severity-badge severity-high">高危</span>
-                    <h3 class="article-title">expr-eval JavaScript库漏洞 — 200万周下载量的定时炸弹</h3>
+                    <h3 class="article-title">Windows Secure Boot证书过期 — 2011年KEK CA正式失效</h3>
                     <div class="article-meta">
-                        <span>CVE-2026-12866</span>
-                        <span class="cvss-score">CVSS 9.8 | 无补丁 | 所有版本</span>
+                        <span>数十亿PC受影响 | 2026年6月24日</span>
+                        <span class="cvss-score">降级安全状态</span>
                     </div>
                     <div class="article-body">
-                        <p>流行的JavaScript表达式评估库expr-eval存在任意代码执行漏洞，所有版本受影响，暂无通用补丁。该库周下载量超过200万，广泛应用于在线计算器、表单验证、配置解析等场景。</p>
-                        <p><strong>风险分析：</strong></p>
+                        <p>微软2011年部署的Secure Boot根证书——Microsoft Corporation KEK CA 2011于今日正式过期。这是Windows生态系统启动层信任基础的代际更迭。</p>
                         <ul>
-                            <li><strong>广泛使用：</strong>大量前端和后端项目依赖</li>
-                            <li><strong>无补丁：</strong>只能通过替换库或添加输入验证缓解</li>
-                            <li><strong>供应链：</strong>通过npm依赖链传播，难以全面排查</li>
+                            <li>未更新PC无法接收新的启动安全缓解措施</li>
+                            <li>进入"降级安全状态"，无法修复BlackLotus等bootkit</li>
+                            <li>Windows 10用户尤其受影响（2025年10月停止支持）</li>
+                            <li>Copilot+ PC和2024年后出厂设备已预装新证书</li>
                         </ul>
                     </div>
                 </article>
 
-                <!-- ★ 普通文章 5 -->
+                <!-- Article 5 -->
                 <article class="article-card">
                     <span class="article-number">5</span>
                     <span class="severity-badge severity-high">高危</span>
-                    <h3 class="article-title">持续跟踪：Splunk/Cisco SD-WAN KEV逾期 — 在野利用仍在继续</h3>
+                    <h3 class="article-title">LastPass再次数据泄露 — 通过Klue供应链攻击窃取OAuth令牌</h3>
                     <div class="article-meta">
-                        <span>CVE-2026-20253/20262</span>
-                        <span class="cvss-score">已逾期 | 积极利用中</span>
+                        <span>第三方供应商Klue | Salesforce数据</span>
+                        <span class="cvss-score">供应链攻击</span>
                     </div>
                     <div class="article-body">
-                        <p>两个之前披露的KEV漏洞已超过修复截止日，但仍在被积极利用。Splunk Enterprise CVE-2026-20253（截止日6月21日）和Cisco SD-WAN CVE-2026-20262（截止日6月23日）均已逾期，风险持续升高。</p>
-                        <p><strong>逾期状态：</strong></p>
-                        <table class="affected-table">
-                            <tr><th>CVE</th><th>产品</th><th>状态</th></tr>
-                            <tr><td>CVE-2026-20253</td><td>Splunk Enterprise</td><td class="risk-high">逾期3天</td></tr>
-                            <tr><td>CVE-2026-20262</td><td>Cisco SD-WAN</td><td class="risk-high">逾期1天</td></tr>
-                        </table>
+                        <p>密码管理服务LastPass确认在Klue供应链攻击中再次遭遇数据泄露。攻击者通过被入侵的Klue软件窃取OAuth令牌，访问Salesforce CRM中的客户数据。</p>
+                        <ul>
+                            <li>泄露内容：客户姓名、电话、邮箱、地址</li>
+                            <li>这是LastPass继2015、2019、2022年后第四次重大安全事件</li>
+                            <li>Klue攻击影响多家安全公司（Huntress/Recorded Future等）</li>
+                            <li>建议用户考虑替代方案（如Bitwarden）</li>
+                        </ul>
                     </div>
                 </article>
 
+                <!-- Article 6 -->
+                <article class="article-card">
+                    <span class="article-number">6</span>
+                    <span class="severity-badge severity-high">高危</span>
+                    <h3 class="article-title">恶意Chrome扩展利用Native Messaging执行PowerShell后门</h3>
+                    <div class="article-meta">
+                        <span>意大利恶意邮件活动 | Windows系统</span>
+                        <span class="cvss-score">浏览器沙箱逃逸</span>
+                    </div>
+                    <div class="article-body">
+                        <p>安全研究人员发现恶意Chrome扩展通过Native Messaging API逃逸浏览器沙箱，在Windows系统上执行PowerShell命令，将浏览器转变为远程后门。</p>
+                        <div class="attack-flow">
+                            <span class="flow-step">恶意邮件</span>
+                            <span class="flow-step">安装扩展</span>
+                            <span class="flow-step">Native Messaging</span>
+                            <span class="flow-step critical">PowerShell</span>
+                        </div>
+                    </div>
+                </article>
             </div>
 
-            <!-- ===== 速览区 ===== -->
+            <!-- Quick News Section -->
             <h3 class="section-header">速览区</h3>
             <div class="quick-news">
                 <div class="quick-item">
-                    <h4>6. Node.js TLS主机名验证绕过漏洞（CVE-2026-48618）</h4>
-                    <p>Node.js被披露存在TLS主机名验证绕过漏洞，攻击者可利用Unicode点分隔符处理差异，绕过TLS通配符证书的深度校验，可能导致中间人攻击或数据窃听。</p>
+                    <h4>7. Shai-Hulud npm供应链攻击持续演化</h4>
+                    <p>新变体针对云和无服务器基础设施开发者，窃取GitHub、npm、云、CI/CD和SSH凭据。微软5月已披露Mini Shai-Hulud变体通过@antv包感染CI/CD环境。</p>
                 </div>
                 <div class="quick-item">
-                    <h4>7. Red Hat Ansible Automation Platform 2.5高危漏洞（CVE-2026-11807，CVSS 9.6）</h4>
-                    <p>Ansible自动化平台存在远程代码执行漏洞，CVSS 9.6分。该漏洞可让攻击者通过特制 playbook 执行任意代码，影响使用Ansible进行自动化运维的企业环境。</p>
+                    <h4>8. LokiBot采用新多阶段攻击链</h4>
+                    <p>利用JScript附件 + .NET注入器 + 进程注入技术窃取凭据，绕过传统边界安全控制。2026年仍是活跃的信息窃取木马。</p>
                 </div>
                 <div class="quick-item">
-                    <h4>8. Electron Framework远程代码执行（CVE-2026-54257，CVSS 9.3）</h4>
-                    <p>Electron框架存在远程代码执行漏洞，影响基于Electron的桌面应用（如VS Code、Slack、Discord等）。攻击者可通过恶意网页或文档触发漏洞。</p>
+                    <h4>9. AiTM钓鱼套件针对AWS用户</h4>
+                    <p>实时窃取AWS控制台凭据和MFA代码，在受害者登录时同步劫持会话。企业AWS环境面临严重风险。</p>
                 </div>
                 <div class="quick-item">
-                    <h4>9. Immich/GV-I/O Box 4E零日漏洞（无补丁）</h4>
-                    <p>开源照片管理平台Immich和GeoVision GV-I/O Box 4E设备被发现存在零日漏洞，披露时无可用补丁。建议隔离受影响服务，限制外部访问。</p>
+                    <h4>10. CISA KEV修复逾期追踪</h4>
+                    <p>Splunk CVE-2026-20253已逾期3天，Cisco SD-WAN CVE-2026-20262已逾期1天，在野利用仍在继续。</p>
                 </div>
             </div>
 
-            <!-- ===== 图表区 ===== -->
-            <h3 class="section-header">今日态势分析</h3>
+            <!-- Charts Section -->
+            <h3 class="section-header">风险分析</h3>
             <div class="charts-grid">
                 <div class="chart-container">
-                    <div class="chart-title">今日关键漏洞类型分布</div>
-                    <div class="mermaid">
-pie
-    title 今日关键漏洞类型分布
-    "远程代码执行 (RCE)" : 45
-    "命令注入" : 25
-    "安全机制绕过" : 15
-    "访问控制绕过" : 10
-    "其他" : 5
-                    </div>
-                </div>
-                <div class="chart-container">
-                    <div class="chart-title">AI/ML工具漏洞影响链</div>
-                    <div class="mermaid">
-flowchart TB
-    subgraph AI_Tools[AI/ML工具漏洞影响链]
-        A[Flowise<br/>CVSS 9.9] --> B[命令注入<br/>MCP Server]
-        C[picklescan<br/>CVSS 9.8] --> D[安全机制绕过<br/>5个CVE]
-        E[Crawl4AI<br/>CVSS 9.8] --> F[远程代码执行]
-        G[Langflow<br/>CVSS 9.6] --> H[远程代码执行]
-    end
-    
-    subgraph Impact[影响范围]
-        I[企业AI平台] --> J[模型供应链]
-        J --> K[生产环境]
-        K --> L[数据泄露/系统控制]
-    end
-    
-    AI_Tools --> Impact
-    
-    style A fill:#ff6b6b,color:white
-    style C fill:#ff6b6b,color:white
-    style E fill:#ffa500,color:white
-    style G fill:#ffa500,color:white
-                    </div>
-                </div>
-            </div>
-
-            <div class="charts-grid">
-                <div class="chart-container">
-                    <div class="chart-title">CISA KEV修复时间线（6月21-26日）</div>
-                    <div class="mermaid">
-timeline
-    title CISA KEV修复时间线（6月21-26日）
-    section 已逾期
-        6月21日 : Splunk CVE-2026-20253 : 逾期3天
-        6月23日 : Cisco SD-WAN CVE-2026-20262 : 逾期1天
-    section 即将截止
-        6月26日 : Ubiquiti UniFi OS x3 : 剩余2天
-        6月26日 : Lantronix EDS5000 : 剩余2天
-                    </div>
-                </div>
-                <div class="chart-container">
-                    <div class="chart-title">今日关键数字</div>
+                    <div class="chart-title">今日漏洞严重性 × 利用状态象限</div>
                     <div class="mermaid">
 quadrantChart
-    title 漏洞严重性 × 利用状态
-    x-axis "低利用风险" --> "高利用风险"
-    y-axis "低严重性" --> "高严重性"
-    quadrant-1 "立即修复"
-    quadrant-2 "重点关注"
+    title 今日漏洞严重性 × 利用状态
+    x-axis "未利用" --> "在野利用"
+    y-axis "低危" --> "严重"
+    quadrant-1 "紧急修复"
+    quadrant-2 "密切关注"
     quadrant-3 "持续监控"
-    quadrant-4 "常规管理"
-    "CVE-2026-34910": [0.95, 0.98]
-    "CVE-2026-56274": [0.85, 0.95]
-    "CVE-2026-56315": [0.80, 0.92]
-    "CVE-2026-12866": [0.75, 0.90]
-    "CVE-2026-11374": [0.70, 0.85]
-    "CVE-2026-20253": [0.90, 0.80]
-    "CVE-2026-20262": [0.88, 0.78]
+    quadrant-4 "常规更新"
+    "UniFi OS三连击 KEV": [0.9, 0.85]
+    "Tata Electronics泄露": [0.85, 0.8]
+    "curl 25年老漏洞": [0.6, 0.75]
+    "Secure Boot证书过期": [0.95, 0.7]
+    "LastPass/Klue供应链": [0.8, 0.65]
+    "Chrome扩展后门": [0.7, 0.6]
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <div class="chart-title">今日安全事件类型分布</div>
+                    <div class="mermaid">
+pie title 今日安全事件类型分布
+    "漏洞利用/CVE" : 35
+    "供应链攻击" : 25
+    "数据泄露" : 20
+    "勒索软件" : 10
+    "钓鱼/恶意软件" : 10
                     </div>
                 </div>
             </div>
 
-            <!-- ===== 行动优先级 ===== -->
-            <h3 class="section-header">今日行动优先级</h3>
-            <div class="article-body">
-                <p><strong>1.【最紧急 - 6月26日截止】</strong> Ubiquiti UniFi OS三个CVSS 10.0漏洞 + Lantronix EDS5000</p>
-                <p><strong>2.【紧急 - 已逾期】</strong> Splunk CVE-2026-20253 + Cisco SD-WAN CVE-2026-20262</p>
-                <p><strong>3.【高危 - AI供应链】</strong> picklescan重新扫描所有ML模型 + Flowise升级</p>
-                <p><strong>4.【高危 - 广泛影响】</strong> ManageEngine SSO漏洞 + expr-eval库漏洞</p>
-                <p><strong>5.【持续监控】</strong> 所有无补丁漏洞的缓解措施有效性</p>
+            <!-- Attack Flow Diagram -->
+            <h3 class="section-header">UniFi OS漏洞链利用流程</h3>
+            <div class="chart-container" style="margin-bottom:40px;">
+                <div class="mermaid">
+flowchart TD
+    A[攻击者获取网络访问] --> B[CVE-2026-34908: 访问控制绕过]
+    B --> C[未授权修改系统配置]
+    C --> D[CVE-2026-34909: 路径遍历]
+    D --> E[读取底层系统文件/获取账户]
+    E --> F[CVE-2026-34910: 命令注入]
+    F --> G[执行任意命令获取root权限]
+    G --> H[横向移动/凭证窃取/数据外传]
+                </div>
             </div>
 
-            <!-- ===== 参考资源 ===== -->
+            <!-- Sequence Diagram -->
+            <h3 class="section-header">curl CVE-2026-8932 mTLS绕过机制</h3>
+            <div class="chart-container" style="margin-bottom:40px;">
+                <div class="mermaid">
+sequenceDiagram
+    participant Client as 客户端
+    participant libcurl as libcurl连接池
+    participant Server as 服务器
+    
+    Client->>libcurl: 连接A (证书X)
+    libcurl->>Server: mTLS握手 (证书X)
+    Server-->>libcurl: 认证成功
+    libcurl-->>Client: 连接A建立
+    
+    Client->>libcurl: 连接B (证书Y, 同一主机)
+    Note over libcurl: 漏洞: 复用连接A<br/>未验证证书变更
+    libcurl->>Server: 复用连接A (仍用证书X)
+    Server-->>libcurl: 成功 (错误认证)
+    libcurl-->>Client: 连接B建立 (认证绕过!)
+                </div>
+            </div>
+
+            <!-- Timeline Section -->
+            <h3 class="section-header">本周事件时间线</h3>
+            <div style="margin-bottom:40px;">
+                <div class="mermaid">
+timeline
+    title 2026年6月第4周网安事件
+    6月22日 : Tata Electronics遭World Leaks勒索
+           : 630GB Apple/Tesla机密文件泄露
+           : Chrome扩展Native Messaging后门曝光
+    6月23日 : CISA新增四个KEV漏洞
+           : Ubiquiti UniFi OS三连击
+           : Lantronix EDS5000代码注入
+    6月24日 : Secure Boot KEK CA 2011证书过期
+           : curl 8.21.0发布修复18个CVE
+           : CVE-2026-8932 25年老漏洞修复
+           : LastPass确认Klue供应链泄露
+           : CISA KEV修复截止日倒计时2天
+    6月25日 : Shai-Hulud npm供应链新变体
+           : LokiBot多阶段攻击链更新
+           : AiTM钓鱼套件针对AWS
+    6月26日 : CISA KEV修复截止日到期
+           : UniFi OS/Lantronix EDS5000
+                </div>
+            </div>
+
+            <!-- References Section -->
+            <h3 class="section-header">相关出处</h3>
             <div class="references-section">
-                <h3 class="section-header">参考资源</h3>
                 <div class="references-grid">
                     <div class="reference-item">
-                        <span class="reference-source">CVE Brief</span>
-                        <a href="https://cvebrief.com/" target="_blank">https://cvebrief.com/</a>
+                        <span class="reference-source">CyberSecurityNews</span>
+                        <a href="https://cybersecuritynews.com/cisa-ubiquiti-unifi-os-vulnerability/">CISA Warns of Ubiquiti UniFi OS Vulnerability</a>
                     </div>
                     <div class="reference-item">
-                        <span class="reference-source">Threat-Modeling</span>
-                        <a href="https://threat-modeling.com/vulnerability-intelligence-report-june-24-2026/" target="_blank">漏洞情报报告</a>
+                        <span class="reference-source">The Realist Juggernaut</span>
+                        <a href="https://therealistjuggernaut.com/2026/06/24/cisa-adds-four-actively-exploited-vulnerabilities-to-known-exploited-vulnerabilities-catalog/">CISA Adds Four Actively Exploited Vulnerabilities</a>
                     </div>
                     <div class="reference-item">
-                        <span class="reference-source">CISA KEV</span>
-                        <a href="https://www.cisa.gov/known-exploited-vulnerabilities-catalog" target="_blank">已知被利用漏洞目录</a>
+                        <span class="reference-source">CyberSecurityNews</span>
+                        <a href="https://cybersecuritynews.com/tata-electronics-data-breach/">Tata Electronics Data Breach</a>
                     </div>
                     <div class="reference-item">
-                        <span class="reference-source">Flowise CVE-2026-56274</span>
-                        <a href="https://threat-modeling.com/cve-2026-56274-flowise-ai-mcp-server-os-command-injection/" target="_blank">漏洞详情</a>
+                        <span class="reference-source">Cybernews</span>
+                        <a href="https://cybernews.com/security/tata-electronics-breach-apple-tesla-secret-files/">Tata breach exposes Apple, Tesla secret files</a>
                     </div>
                     <div class="reference-item">
-                        <span class="reference-source">picklescan绕过</span>
-                        <a href="https://threat-modeling.com/picklescan-bypass-vulnerabilities-ml-supply-chain-5-cves/" target="_blank">5个CVE详情</a>
+                        <span class="reference-source">TechCrunch</span>
+                        <a href="https://techcrunch.com/2026/06/22/tata-electronics-a-major-tech-supplier-to-apple-and-tesla-confirms-data-breach/">Tata Electronics confirms data breach</a>
                     </div>
                     <div class="reference-item">
-                        <span class="reference-source">Ubiquiti安全公告</span>
-                        <a href="https://community.ui.com/releases" target="_blank">安全公告064</a>
+                        <span class="reference-source">CyberSecurityNews</span>
+                        <a href="https://cybersecuritynews.com/25-year-old-curl-vulnerability/">25-Year-Old Vulnerability in curl</a>
                     </div>
                     <div class="reference-item">
-                        <span class="reference-source">ManageEngine</span>
-                        <a href="https://www.manageengine.com/security/advisory.html" target="_blank">安全公告</a>
+                        <span class="reference-source">Digital Warfare</span>
+                        <a href="https://digitalwarfare.com/curl-flaw-cve-2026-8932-undetected-for-25-years-now-patched/">curl flaw CVE-2026-8932</a>
                     </div>
                     <div class="reference-item">
-                        <span class="reference-source">NVD - CVE-2026-56315</span>
-                        <a href="https://nvd.nist.gov/vuln/detail/CVE-2026-56315" target="_blank">漏洞详情</a>
+                        <span class="reference-source">XDA Developers</span>
+                        <a href="https://www.xda-developers.com/microsoft-secure-boot-certificates-expire-june-2026-older-pcs/">Microsoft Secure Boot certificates expire</a>
                     </div>
                     <div class="reference-item">
-                        <span class="reference-source">CISA BOD 26-04</span>
-                        <a href="https://www.cisa.gov/directives/bod-26-04" target="_blank">指令详情</a>
+                        <span class="reference-source">知乎</span>
+                        <a href="https://zhuanlan.zhihu.com/p/2015141187628074602">2026年UEFI证书过期事件的技术解析</a>
                     </div>
                     <div class="reference-item">
-                        <span class="reference-source">SharkStriker</span>
-                        <a href="https://sharkstriker.com/blog/june-2026-data-breaches/" target="_blank">6月数据泄露</a>
+                        <span class="reference-source">TechPP</span>
+                        <a href="https://techpp.com/2026/06/24/daily-brief-june-24-2026-lastpass-data-breach/">Daily Brief June 24 2026</a>
+                    </div>
+                    <div class="reference-item">
+                        <span class="reference-source">CyberPress</span>
+                        <a href="https://cyberpress.org/chrome-policies-force-extensions/">Chrome Policies Force Extensions</a>
+                    </div>
+                    <div class="reference-item">
+                        <span class="reference-source">D3Lab</span>
+                        <a href="https://www.d3lab.net/breaking-out-of-chromes-sandbox-a-native-messaging-backdoor-observed-in-italy/">Chrome Native Messaging Backdoor</a>
+                    </div>
+                    <div class="reference-item">
+                        <span class="reference-source">Microsoft Security Blog</span>
+                        <a href="https://www.microsoft.com/en-us/security/blog/2026/05/20/mini-shai-hulud-compromised-antv-npm-packages-enable-ci-cd-credential-theft/">Mini Shai-Hulud npm packages</a>
+                    </div>
+                    <div class="reference-item">
+                        <span class="reference-source">Reuters</span>
+                        <a href="https://www.reuters.com/business/media-telecom/indias-tata-electronics-hit-by-cyber-breach-claiming-expose-apple-tesla-trade-2026-06-22/">Tata Electronics cyber breach</a>
+                    </div>
+                    <div class="reference-item">
+                        <span class="reference-source">CISA</span>
+                        <a href="https://www.cisa.gov/known-exploited-vulnerabilities-catalog">KEV Catalog</a>
                     </div>
                 </div>
             </div>
-
         </div>
 
-        <!-- ========== 页脚 ========== -->
+        <!-- Footer -->
         <footer class="newspaper-footer">
-            <div class="footer-logo">网安日报速递 · CYBERSECURITY DAILY EXPRESS</div>
-            <div class="footer-disclaimer">
-                <p>编辑: Lin @ WorkBuddy | 发布时间: 2026-06-24 12:30 GMT+8</p>
-                <p>数据来源: CVE Brief, Threat-Modeling, CISA KEV, NVD, BleepingComputer, SecurityWeek</p>
-                <p>免责声明: 本报告仅供安全研究参考，不构成任何安全建议。请根据实际情况制定安全策略。</p>
-            </div>
+            <div class="footer-logo">AI城 · 网安日报</div>
+            <p class="footer-disclaimer">
+                免责声明：本报告基于公开信息整理，CVE编号、CVSS评分等数据以官方源为准。建议读者查阅原始来源获取最新动态。
+                <br>
+                每日精选 · 值得关注 | 2026年6月24日
+            </p>
         </footer>
     </div>
 
