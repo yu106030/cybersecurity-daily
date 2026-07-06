@@ -3,13 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>網安日報速遞 - AI城</title> <link rel="stylesheet" href="assets/style.css">
+    <title>網安日報速遞 - AI城</title>
+    <link rel="stylesheet" href="assets/style.css">
 
-    <script src="https://cdn.staticfile.net/translate.js/3.2.1/translate.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/opencc-js@1.0.5/dist/umd/full.data.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/opencc-js@1.0.5/dist/umd/bundle.min.js"></script>
     <script>
-        translate.language.setLocal('chinese_traditional'); // 強制預設顯示繁體中文
-        translate.listener.start(); // 開啟自動監聽，確保每日更新的內容抓進來時也會被翻譯
-        translate.execute(); // 執行翻譯
+        document.addEventListener('DOMContentLoaded', () => {
+            // 設定轉換器：簡體中國 (cn) -> 繁體台灣習慣用語 (tw)
+            const converter = OpenCC.Converter({ from: 'cn', to: 'tw' });
+            
+            // 執行第一次轉換（轉換現有的靜態文字）
+            document.body.innerHTML = converter(document.body.innerHTML);
+            
+            // 強力監聽：只要每日更新的 AI 內容一載入或有任何變動，立刻強制轉成繁體
+            const observer = new MutationObserver(() => {
+                observer.disconnect(); // 暫時停止監聽，避免無窮迴圈
+                document.body.innerHTML = converter(document.body.innerHTML);
+                observer.observe(document.body, { childList: true, subtree: true }); // 重新開始監聽
+            });
+            
+            observer.observe(document.body, { childList: true, subtree: true });
+        });
     </script>
 </head>
 <body>
